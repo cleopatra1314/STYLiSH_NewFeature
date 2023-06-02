@@ -35,6 +35,8 @@
 	<string>368446190389666</string>
 	<key>FacebookDisplayName</key>
 	<string>AppWorksSchool.STYLiSH</string>
+	<key>FacebookClientToken</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
