@@ -10,10 +10,11 @@ import UIKit
 
 class DivinationResultViewController: STBaseViewController {
     
+    private let cellTypes: [DivinationCellType] = [.poem, .coupon, .prodcut]
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .systemIndigo
         return tableView
     }()
     
@@ -36,7 +37,43 @@ class DivinationResultViewController: STBaseViewController {
         ])
         
         // Configure the table view
-        //tableView.delegate = self
-        //tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(PoemTableViewCell.self,
+                           forCellReuseIdentifier: PoemTableViewCell.reuseIdentifier
+        )
+    }
+}
+
+extension DivinationResultViewController: UITableViewDataSource, UITableViewDelegate {
+    private enum DivinationCellType {
+        case poem
+        case coupon
+        case prodcut
+
+        func identifier() -> String {
+            switch self {
+            case .poem: return PoemTableViewCell.reuseIdentifier
+            case .coupon: return PoemTableViewCell.reuseIdentifier
+            case .prodcut: return PoemTableViewCell.reuseIdentifier
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellType = cellTypes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellType.identifier(), for: indexPath)
+        switch cellType {
+        case .poem:
+            guard let cell = cell as? PoemTableViewCell else { return cell }
+            cell.configure(with: "抽中大吉籤！", subtitle: "風恬浪靜可行舟 \n恰是中秋月一輪 \n凡事不須多憂慮 \n福祿自有慶家門")
+            return cell
+        case .coupon: return cell
+        case .prodcut: return cell
+        }
     }
 }
