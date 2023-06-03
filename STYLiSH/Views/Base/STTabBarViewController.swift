@@ -59,7 +59,7 @@ extension STTabBarViewController {
             case .product: controller = UIStoryboard.product.instantiateInitialViewController()!
             case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
             case .trolley: controller = UIStoryboard.trolley.instantiateInitialViewController()!
-            case .divination: controller = DivinationResultViewController() //to be deleted
+            case .divination: controller = STTransparentNavigationController.init(rootViewController: DivinationResultViewController() ) //to be deleted
             }
             controller.tabBarItem = makeTabBarItem()
             controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)

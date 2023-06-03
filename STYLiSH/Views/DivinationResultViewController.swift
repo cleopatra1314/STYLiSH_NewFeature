@@ -57,6 +57,11 @@ class DivinationResultViewController: STBaseViewController {
     }()
     
     // MARK: - View Life Cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -184,7 +189,6 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
                     return
                 }
                 detailVC.product = data.products[indexPath.row]
-                detailVC.modalTransitionStyle = .coverVertical
                 show(detailVC, sender: nil)
             }
             return cell
