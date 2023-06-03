@@ -126,6 +126,11 @@
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
 		C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8AB46EE2A2A838E0043C379 /* Divination.storyboard */; };
 		C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */; };
+		C8BA70A92A2B2042003654E5 /* DivinationTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */; };
+		C8BA70AB2A2B2981003654E5 /* GenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */; };
+		C8BA70AD2A2B29A0003654E5 /* BirthdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */; };
+		C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */; };
+		C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -263,6 +268,11 @@
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
 		C8AB46EE2A2A838E0043C379 /* Divination.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Divination.storyboard; sourceTree = "<group>"; };
 		C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationViewController.swift; sourceTree = "<group>"; };
+		C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationTitleTableViewCell.swift; sourceTree = "<group>"; };
+		C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderTableViewCell.swift; sourceTree = "<group>"; };
+		C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTableViewCell.swift; sourceTree = "<group>"; };
+		C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
+		C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -524,6 +534,11 @@
 			children = (
 				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
 				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
+				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
+				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
+				C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */,
+				C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */,
+				C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */,
 				3CD2911B221135E2008B8A2D /* STYLiSH */,
 				3CD2911A221135E2008B8A2D /* Products */,
 				F26A8A19BFED7C956C38BFE8 /* Frameworks */,
@@ -736,7 +751,6 @@
 				3CD29116221135E2008B8A2D /* Frameworks */,
 				3CD29117221135E2008B8A2D /* Resources */,
 				BD721BFB42BEC7C4CF30F644 /* [CP] Embed Pods Frameworks */,
-				3C6FABF322FD26EA00226316 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -833,24 +847,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C6FABF322FD26EA00226316 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 		BD721BFB42BEC7C4CF30F644 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -922,12 +918,14 @@
 				3C546BE722EAC79D0082C655 /* STOrderHeaderView.swift in Sources */,
 				3C5DD7CC2227EFFF0053B67A /* TrolleyViewController.swift in Sources */,
 				3C6020EA222BC00100312958 /* UILabel+Extension.swift in Sources */,
+				C8BA70A92A2B2042003654E5 /* DivinationTitleTableViewCell.swift in Sources */,
 				3CB80E76222FCBE60095F18C /* STConstant.swift in Sources */,
 				3C1ACFE422151F50005583E2 /* ProfileViewController.swift in Sources */,
 				3C34794C222E82F600969C30 /* AmountSelectionCell.swift in Sources */,
 				3C75FD0F22F1767D0068FEA5 /* CheckoutResultViewController.swift in Sources */,
 				3CE7A51C223089C3009FF003 /* OrderProvider.swift in Sources */,
 				3C0DD87A221350B300F5237E /* UIColor+Extension.swift in Sources */,
+				C8BA70AD2A2B29A0003654E5 /* BirthdayTableViewCell.swift in Sources */,
 				3CC706162216B34800CAD850 /* ProductTableViewCell.swift in Sources */,
 				3CEBE077222F718D0064EF82 /* StorageManager.swift in Sources */,
 				3C09F51C22114A0100C5B3E2 /* STTabBarViewController.swift in Sources */,
@@ -946,11 +944,13 @@
 				C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */,
 				3CE7A50222302354009FF003 /* ProductContentCategory.swift in Sources */,
 				3C6020E8222BBA3C00312958 /* ProductBasicCell.swift in Sources */,
+				C8BA70AB2A2B2981003654E5 /* GenderTableViewCell.swift in Sources */,
 				3CE7A51522305E5A009FF003 /* KeyChainManager.swift in Sources */,
 				3C1ACFEB22153114005583E2 /* ProfileCollectionReusableView.swift in Sources */,
 				3C9C0D532215400900595689 /* ProfileItem.swift in Sources */,
 				3C9EF5362213C97D00DEE152 /* MarketRequest.swift in Sources */,
 				3CB801252229AEE30029A552 /* UITableView+Extension.swift in Sources */,
+				C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */,
 				3CDC5A6A222D860B0071D0D1 /* SizeSelectionCell.swift in Sources */,
 				3C1ACFE622152B1F005583E2 /* UIScreen+Extension.swift in Sources */,
 				3C6020DD222B90DF00312958 /* ProductDetailCell.swift in Sources */,
@@ -971,6 +971,7 @@
 				3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */,
 				3C33863F221BB2B800ED97E4 /* ProductListViewController.swift in Sources */,
 				3C6020E6222BB03400312958 /* STBaseViewController.swift in Sources */,
+				C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */,
 				3CEBE07E222F979F0064EF82 /* JGProgressHUDWrapper.swift in Sources */,
 				3CCB3BC6222AAC8300976A1C /* LKGalleryView.swift in Sources */,
 				3C9C0D552215443900595689 /* ProfileManager.swift in Sources */,
