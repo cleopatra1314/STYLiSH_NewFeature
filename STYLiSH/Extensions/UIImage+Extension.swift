@@ -16,6 +16,8 @@ enum ImageAsset: String {
     case Icons_36px_Home_Selected
     case Icons_36px_Profile_Normal
     case Icons_36px_Profile_Selected
+    case Icons_36px_Divination
+    case Icons_36px_Divination_Selected
     case Icons_36px_Cart_Normal
     case Icons_36px_Cart_Selected
     case Icons_36px_Catalog_Normal

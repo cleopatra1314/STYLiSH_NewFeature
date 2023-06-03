@@ -124,6 +124,8 @@
 		3CED80AF2301301300B7DA8E /* Trolley.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED80B12301301300B7DA8E /* Trolley.storyboard */; };
 		3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAC67222EEF71C00785FAB /* String+Extension.swift */; };
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
+		C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8AB46EE2A2A838E0043C379 /* Divination.storyboard */; };
+		C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -259,6 +261,8 @@
 		3CFAC67222EEF71C00785FAB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STYLiSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
+		C8AB46EE2A2A838E0043C379 /* Divination.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Divination.storyboard; sourceTree = "<group>"; };
+		C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationViewController.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,6 +522,8 @@
 		3CD29110221135E2008B8A2D = {
 			isa = PBXGroup;
 			children = (
+				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
+				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
 				3CD2911B221135E2008B8A2D /* STYLiSH */,
 				3CD2911A221135E2008B8A2D /* Products */,
 				F26A8A19BFED7C956C38BFE8 /* Frameworks */,
@@ -798,6 +804,7 @@
 				3C4B10D822292732009942B7 /* card_mastercard@3x.png in Resources */,
 				3CD29124221135E3008B8A2D /* Assets.xcassets in Resources */,
 				3C4B10D222292732009942B7 /* card_unknown@3x.png in Resources */,
+				C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */,
 				3CD29122221135E2008B8A2D /* Main.storyboard in Resources */,
 				3CC706172216B34800CAD850 /* ProductTableViewCell.xib in Resources */,
 				3C831C6122E9945500112298 /* STOrderProductCell.xib in Resources */,
@@ -936,6 +943,7 @@
 				3CED80AE23012CE400B7DA8E /* NSLocalizedString+Extension.swift in Sources */,
 				3CA25519222A484300B286F6 /* ProductsListProvider.swift in Sources */,
 				3C3369162227CE7D008A5A7A /* TrolleyProductBaseView.swift in Sources */,
+				C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */,
 				3CE7A50222302354009FF003 /* ProductContentCategory.swift in Sources */,
 				3C6020E8222BBA3C00312958 /* ProductBasicCell.swift in Sources */,
 				3CE7A51522305E5A009FF003 /* KeyChainManager.swift in Sources */,

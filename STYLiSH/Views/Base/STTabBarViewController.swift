@@ -10,7 +10,7 @@ import UIKit
 
 class STTabBarViewController: UITabBarController {
 
-    private let tabs: [Tab] = [.lobby, .product, .trolley, .profile]
+    private let tabs: [Tab] = [.lobby, .product, .divination, .trolley, .profile]
     
     private var trolleyTabBarItem: UITabBarItem?
     
@@ -21,7 +21,7 @@ class STTabBarViewController: UITabBarController {
 
         viewControllers = tabs.map { $0.makeViewController() }
 
-        trolleyTabBarItem = viewControllers?[2].tabBarItem
+        trolleyTabBarItem = viewControllers?[3].tabBarItem
         trolleyTabBarItem?.badgeColor = .brown
         
         orderObserver = StorageManager.shared.observe(
@@ -48,6 +48,7 @@ extension STTabBarViewController {
     private enum Tab {
         case lobby
         case product
+        case divination
         case profile
         case trolley
 
@@ -56,6 +57,7 @@ extension STTabBarViewController {
             switch self {
             case .lobby: controller = UIStoryboard.lobby.instantiateInitialViewController()!
             case .product: controller = UIStoryboard.product.instantiateInitialViewController()!
+            case .divination: controller = UIStoryboard.divination.instantiateInitialViewController()!
             case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
             case .trolley: controller = UIStoryboard.trolley.instantiateInitialViewController()!
             }
@@ -74,6 +76,8 @@ extension STTabBarViewController {
                 return .asset(.Icons_36px_Home_Normal)
             case .product:
                 return .asset(.Icons_36px_Catalog_Normal)
+            case .divination:
+                return .asset(.Icons_36px_Divination)
             case .trolley:
                 return .asset(.Icons_36px_Cart_Normal)
             case .profile:
@@ -87,6 +91,8 @@ extension STTabBarViewController {
                 return .asset(.Icons_36px_Home_Selected)
             case .product:
                 return .asset(.Icons_36px_Catalog_Selected)
+            case .divination:
+                return .asset(.Icons_36px_Divination_Selected)
             case .trolley:
                 return .asset(.Icons_36px_Cart_Selected)
             case .profile:
