@@ -126,6 +126,7 @@
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
 		C2A35B672A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */; };
 		C2A35B692A2B0D2700F5CA13 /* DivinationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */; };
+		C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */; };
 		C2CC8EDF2A29FB2D00DC8C8A /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */; };
 		C2CC8EE12A2A060A00DC8C8A /* PoemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */; };
 		C2CC8EE32A2A2CD200DC8C8A /* CouponTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */; };
@@ -266,6 +267,7 @@
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
 		C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductTableViewCell.swift; sourceTree = "<group>"; };
 		C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationProvider.swift; sourceTree = "<group>"; };
+		C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemTableViewCell.swift; sourceTree = "<group>"; };
 		C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewCell.swift; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */,
 				C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */,
 				C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */,
+				C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				3C75FD0F22F1767D0068FEA5 /* CheckoutResultViewController.swift in Sources */,
 				3CE7A51C223089C3009FF003 /* OrderProvider.swift in Sources */,
 				3C0DD87A221350B300F5237E /* UIColor+Extension.swift in Sources */,
+				C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */,
 				3CC706162216B34800CAD850 /* ProductTableViewCell.swift in Sources */,
 				3CEBE077222F718D0064EF82 /* StorageManager.swift in Sources */,
 				3C09F51C22114A0100C5B3E2 /* STTabBarViewController.swift in Sources */,

@@ -46,7 +46,7 @@ class CouponTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let button1: UIButton = {
+    private let redoButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("重抽", for: .normal)
@@ -57,7 +57,7 @@ class CouponTableViewCell: UITableViewCell {
         return button
     }()
         
-    private let button2: UIButton = {
+    private let receiveButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("領取", for: .normal)
@@ -78,6 +78,19 @@ class CouponTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    var showPopUpView: (() -> Void)?
+    var popViewController: (() -> Void)?
+    
+    @objc func redrawCoupon() {
+        print("redraw tapped")
+        popViewController?()
+    }
+    
+    @objc func receiveCoupon() {
+        print("receive tapped")
+        showPopUpView?()
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -90,8 +103,11 @@ class CouponTableViewCell: UITableViewCell {
         labelsContainerView.addSubview(couponDiscount)
         labelsContainerView.addSubview(couponExpirationDate)
         
-        buttonsStackView.addArrangedSubview(button1)
-        buttonsStackView.addArrangedSubview(button2)
+        buttonsStackView.addArrangedSubview(redoButton)
+        buttonsStackView.addArrangedSubview(receiveButton)
+        
+        redoButton.addTarget(self, action: #selector(redrawCoupon), for: .touchUpInside)
+        receiveButton.addTarget(self, action: #selector(receiveCoupon), for: .touchUpInside)
         
         // Set up the constraints for the UI components
         NSLayoutConstraint.activate([
