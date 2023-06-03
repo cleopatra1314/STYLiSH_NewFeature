@@ -12,6 +12,14 @@ class DivinationResultViewController: STBaseViewController {
     
     private let cellTypes: [DivinationCellType] = [.poem, .coupon, .prodcut]
     
+    var data: DivinationData? {
+        didSet {
+            DispatchQueue.main.async { [unowned self] in
+                tableView.reloadData()
+            }
+        }
+    }
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,9 +29,7 @@ class DivinationResultViewController: STBaseViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
-        navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
         
         // Add the table view to the view controller's view
         view.addSubview(tableView)
@@ -43,6 +49,14 @@ class DivinationResultViewController: STBaseViewController {
                            forCellReuseIdentifier: PoemTableViewCell.reuseIdentifier)
         tableView.register(CouponTableViewCell.self,
                            forCellReuseIdentifier: CouponTableViewCell.reuseIdentifier)
+        tableView.register(RecommendedProductTableViewCell.self,
+                           forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
+        
+        DivinationProvider.shared.fetchDivinationResult { [weak self] data in
+            guard let self = self else { return }
+            self.data = data
+            print(data)
+        }
     }
 }
 
@@ -56,31 +70,59 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             switch self {
             case .poem: return PoemTableViewCell.reuseIdentifier
             case .coupon: return CouponTableViewCell.reuseIdentifier
-            case .prodcut: return PoemTableViewCell.reuseIdentifier
+            case .prodcut: return RecommendedProductTableViewCell.reuseIdentifier
             }
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellType = cellTypes[indexPath.row]
+        switch cellType {
+        case .prodcut: return 400
+        default: return UITableView.automaticDimension
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = cellTypes[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellType.identifier(), for: indexPath)
+        cell.selectionStyle = .none
+        guard let data = self.data else { return cell }
         switch cellType {
         case .poem:
             guard let cell = cell as? PoemTableViewCell else { return cell }
-            cell.configure(with: "抽中大吉籤！", subtitle: "風恬浪靜可行舟 \n恰是中秋月一輪 \n凡事不須多憂慮 \n福祿自有慶家門")
+            cell.configure(with: "抽中\(data.strawsStory.type)！",
+                           subtitle: data.strawsStory.story) //"風恬浪靜可行舟， \n恰是中秋月一輪，\n凡事不須多憂慮， \n福祿自有慶家門。")
             return cell
         case .coupon:
             guard let cell = cell as? CouponTableViewCell else { return cell }
-            cell.configure(with: "獲得xx折價卷乙張",
-                           couponNameText: "xx折價卷",
-                           couponDiscountText: "$200",
-                           couponExpirationDateText: "2023/06/10到期")
+            let validDate = data.validDate.split(separator: " ")[0]
+            
+            cell.configure(with: "獲得\(data.couponName)折價卷乙張",
+                           couponNameText: "\(data.description)折價卷",
+                           couponDiscountText: "$\(data.discount)",
+                           couponExpirationDateText: "\(validDate)到期")
             return cell
         case .prodcut:
+            guard let cell = cell as? RecommendedProductTableViewCell else { return cell }
+            cell.data = data.products
+            cell.showDetailPage = { [weak self] (indexPath) -> Void in
+                guard
+                    let self = self,
+                    let detailVC = UIStoryboard.product.instantiateViewController(
+                        withIdentifier: String(describing: ProductDetailViewController.self)
+                    ) as? ProductDetailViewController
+                else {
+                    return
+                }
+                detailVC.product = data.products[indexPath.row]
+                detailVC.modalTransitionStyle = .coverVertical
+                show(detailVC, sender: nil)
+            }
             return cell
         }
     }
