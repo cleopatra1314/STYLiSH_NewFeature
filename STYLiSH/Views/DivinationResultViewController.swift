@@ -40,8 +40,9 @@ class DivinationResultViewController: STBaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PoemTableViewCell.self,
-                           forCellReuseIdentifier: PoemTableViewCell.reuseIdentifier
-        )
+                           forCellReuseIdentifier: PoemTableViewCell.reuseIdentifier)
+        tableView.register(CouponTableViewCell.self,
+                           forCellReuseIdentifier: CouponTableViewCell.reuseIdentifier)
     }
 }
 
@@ -54,14 +55,14 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
         func identifier() -> String {
             switch self {
             case .poem: return PoemTableViewCell.reuseIdentifier
-            case .coupon: return PoemTableViewCell.reuseIdentifier
+            case .coupon: return CouponTableViewCell.reuseIdentifier
             case .prodcut: return PoemTableViewCell.reuseIdentifier
             }
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,8 +73,15 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             guard let cell = cell as? PoemTableViewCell else { return cell }
             cell.configure(with: "抽中大吉籤！", subtitle: "風恬浪靜可行舟 \n恰是中秋月一輪 \n凡事不須多憂慮 \n福祿自有慶家門")
             return cell
-        case .coupon: return cell
-        case .prodcut: return cell
+        case .coupon:
+            guard let cell = cell as? CouponTableViewCell else { return cell }
+            cell.configure(with: "獲得xx折價卷乙張",
+                           couponNameText: "xx折價卷",
+                           couponDiscountText: "$200",
+                           couponExpirationDateText: "2023/06/10到期")
+            return cell
+        case .prodcut:
+            return cell
         }
     }
 }
