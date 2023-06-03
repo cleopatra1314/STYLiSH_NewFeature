@@ -52,11 +52,11 @@ class DivinationResultViewController: STBaseViewController {
         tableView.register(RecommendedProductTableViewCell.self,
                            forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
         
-        DivinationProvider.shared.fetchDivinationResult { [weak self] data in
-            guard let self = self else { return }
-            self.data = data
-            print(data)
-        }
+//        DivinationProvider.shared.fetchDivinationResult { [weak self] data in
+//            guard let self = self else { return }
+//            self.data = data
+//            print(data)
+//        }
     }
 }
 
@@ -82,6 +82,7 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellType = cellTypes[indexPath.row]
         switch cellType {
+        case .poem: return 200
         case .prodcut: return 400
         default: return UITableView.automaticDimension
         }
@@ -96,7 +97,7 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
         case .poem:
             guard let cell = cell as? PoemTableViewCell else { return cell }
             cell.configure(with: "抽中\(data.strawsStory.type)！",
-                           subtitle: data.strawsStory.story) //"風恬浪靜可行舟， \n恰是中秋月一輪，\n凡事不須多憂慮， \n福祿自有慶家門。")
+                           subtitle: data.strawsStory.story)
             return cell
         case .coupon:
             guard let cell = cell as? CouponTableViewCell else { return cell }
