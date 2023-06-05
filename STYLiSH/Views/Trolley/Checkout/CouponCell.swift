@@ -1,5 +1,5 @@
 //
-//  CouponTableViewCell.swift
+//  CouponCell.swift
 //  STYLiSH
 //
 //  Created by Lin Hsin-An on 2023/6/5.
@@ -11,27 +11,24 @@ import UIKit
 class CouponCell: UITableViewCell {
     static let reuseIdentifier = String(describing: CouponCell.self)
     
-    let button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("選擇折價卷>>", for: .normal)
-        button.setTitleColor(.B1, for: .normal)
-        button.titleLabel?.font = .medium(size: 16)
-        button.layer.cornerRadius = 10
-        return button
+    private let couponImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "free_shipping")
+        return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Add the labels to the cell's content view
-        contentView.addSubview(button)
+        [couponImageView].forEach { addSubview($0) }
         
-        // Set up the label constraints
         NSLayoutConstraint.activate([
-            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            button.heightAnchor.constraint(equalToConstant: 30)
+            couponImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            couponImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            couponImageView.heightAnchor.constraint(equalToConstant: 100),
+            couponImageView.widthAnchor.constraint(equalTo: couponImageView.heightAnchor, multiplier: 1),
         ])
     }
     

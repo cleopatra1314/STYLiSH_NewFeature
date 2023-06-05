@@ -66,7 +66,7 @@ class CheckoutViewController: STBaseViewController {
         tableView.lk_registerCellWithNib(identifier: STOrderProductCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STOrderUserInputCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STPaymentInfoTableViewCell.identifier, bundle: nil)
-        tableView.register(CouponCell.self, forCellReuseIdentifier: CouponCell.reuseIdentifier)
+        tableView.register(CouponCheckoutCell.self, forCellReuseIdentifier: CouponCheckoutCell.reuseIdentifier)
         
         let headerXib = UINib(nibName: STOrderHeaderView.identifier, bundle: nil)
         tableView.register(headerXib, forHeaderFooterViewReuseIdentifier: STOrderHeaderView.identifier)
@@ -147,19 +147,22 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
         case .coupon: return 0
         default: return 67.0
         }
-        //return 67.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            let headerView = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: STOrderHeaderView.identifier
-            ) as? STOrderHeaderView
-        else {
-            return nil
+        switch orderProvider.orderCustructor[section] {
+        case .coupon: return nil
+        default:
+            guard
+                let headerView = tableView.dequeueReusableHeaderFooterView(
+                    withIdentifier: STOrderHeaderView.identifier
+                ) as? STOrderHeaderView
+            else {
+                return nil
+            }
+            headerView.titleLabel.text = orderProvider.orderCustructor[section].title()
+            return headerView
         }
-        headerView.titleLabel.text = orderProvider.orderCustructor[section].title()
-        return headerView
     }
     
     // MARK: - Section Footer
@@ -188,9 +191,17 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
         case .reciever:
             return mappingCellWtih(reciever: orderProvider.order.reciever, at: indexPath)
         case .coupon:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CouponCell.reuseIdentifier, for: indexPath)
-            guard let couponCell = cell as? CouponCell else { return cell}
-            return couponCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CouponCheckoutCell.reuseIdentifier, for: indexPath)
+            cell.selectionStyle = .none
+            guard let couponCheckoutCell = cell as? CouponCheckoutCell else { return cell}
+            return couponCheckoutCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let couponTableVC = CouponTableViewController()
+            navigationController?.pushViewController(couponTableVC, animated: true)
         }
     }
     
