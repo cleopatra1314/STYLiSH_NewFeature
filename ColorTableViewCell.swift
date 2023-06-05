@@ -25,6 +25,7 @@ class ColorTableViewCell: UITableViewCell{
         return colorStack
     }()
     var colorButtonsArray = [UIButton]()
+    var indexOfSelectedColor: Int?
     
     
     func layoutColorBall(arrayOfColor: Array<String>){
@@ -36,16 +37,18 @@ class ColorTableViewCell: UITableViewCell{
             colorBallButton.layer.borderColor = UIColor.darkGray.cgColor
             colorBallButton.backgroundColor = UIColor.hexStringToUIColor(hex: arrayOfColor[index - 1])
             colorBallButton.addTarget(self, action: #selector(colorButtonTouchUpInside), for: .touchUpInside)
-//            NSLayoutConstraint.activate([
-//                colorBallButton.heightAnchor.constraint(equalToConstant: 40),
-//                colorBallButton.widthAnchor.constraint(equalTo: colorBallButton.heightAnchor)
-//            ])
-            colorBallButton.layer.cornerRadius = colorBallButton.frame.width / 2
+            colorBallButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                colorBallButton.heightAnchor.constraint(equalToConstant: 40),
+                colorBallButton.widthAnchor.constraint(equalTo: colorBallButton.heightAnchor)
+            ])
+            colorBallButton.layer.cornerRadius = 20
             colorStack.addArrangedSubview(colorBallButton)
             colorButtonsArray.append(colorBallButton)
         }
         
     }
+    
     
     func layoutCell(){
         
@@ -63,16 +66,20 @@ class ColorTableViewCell: UITableViewCell{
         
     }
     
+    
     @objc func colorButtonTouchUpInside(sender: UIButton){
         
         sender.isSelected.toggle()
-        for button in colorButtonsArray{
+        for (i, button) in colorButtonsArray.enumerated(){
             if button != sender{
                 button.isSelected = false
+            }else{
+                indexOfSelectedColor = i
             }
             button.layer.borderWidth = button.isSelected ? 2 : 0
         }
-//        sender.layer.borderWidth = sender.isSelected ? 2 : 0
+        
     }
+    
     
 }

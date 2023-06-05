@@ -45,7 +45,6 @@ class BirthdayTableViewCell: UITableViewCell{
         birthdayPicker.locale = Locale(identifier: "zh_Hans_CN")
         birthdayPicker.addTarget(self, action: #selector(birthdayPickerValueChanged), for: .valueChanged)
         
-        
         return birthdayPicker
     }()
     let formatter: DateFormatter = {
@@ -54,14 +53,20 @@ class BirthdayTableViewCell: UITableViewCell{
         
         return formatter
     }()
+    let selectedFormatter: DateFormatter = {
+        let selectedFormatter = DateFormatter()
+        selectedFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return selectedFormatter
+    }()
     let constellationLabel: UILabel = {
         let constellationLabel = UILabel()
         constellationLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return constellationLabel
     }()
-    
-    
+    var selectedDateString: String?
+    var selectedConstellation: String?
     
     func layoutCell(){
         
@@ -91,7 +96,112 @@ class BirthdayTableViewCell: UITableViewCell{
             let selectedDate = sender.date
             let formattedDate = formatter.string(from: selectedDate)
             birthdayTextField.text = formattedDate
-            // 在此处执行其他操作，根据选中的日期进行逻辑处理
+            
+            let selectedFormattedDate = selectedFormatter.string(from: selectedDate)
+            selectedDateString = selectedFormattedDate
+            print("輸入日期為 \(selectedDateString)")
+
+            let monthComponentOfDate = selectedDate.get(.month)
+            let dayComponentOfDate = selectedDate.get(.day)
+            
+        enum constellation: String{
+            case 水瓶座
+            case 雙魚座
+            case 牡羊座
+            case 金牛座
+            case 雙子座
+            case 巨蟹座
+            case 獅子座
+            case 處女座
+            case 天秤座
+            case 天蠍座
+            case 射手座
+            case 摩羯座
+            
+            func getZodiac() -> String{
+                switch self{
+                case .水瓶座:
+                    return "Aquarius"
+                case .雙魚座:
+                    return "Pisces"
+                case .牡羊座:
+                    return "Aries"
+                case .金牛座:
+                    return "Taurus"
+                case .雙子座:
+                    return "Gemini"
+                case .巨蟹座:
+                    return "Cancer"
+                case .獅子座:
+                    return "Leo"
+                case .處女座:
+                    return "Virgo"
+                case .天秤座:
+                    return "Libra"
+                case .天蠍座:
+                    return "Scorpio"
+                case .射手座:
+                    return "Sagittarius"
+                case .摩羯座:
+                    return "Capricorn"
+                }
+            }
+            
         }
+        
+        
+        var zodiac: constellation = { if ((monthComponentOfDate == 1 && dayComponentOfDate >= 20) || (monthComponentOfDate == 2 && dayComponentOfDate <= 18)) {
+            return constellation.水瓶座
+            
+        } else if ((monthComponentOfDate == 2 && dayComponentOfDate >= 19) || (monthComponentOfDate == 3 && dayComponentOfDate <= 20)) {
+            return constellation.雙魚座
+            
+        } else if ((monthComponentOfDate == 3 && dayComponentOfDate >= 21) || (monthComponentOfDate == 4 && dayComponentOfDate <= 19)) {
+            return constellation.牡羊座
+            
+        } else if ((monthComponentOfDate == 4 && dayComponentOfDate >= 20) || (monthComponentOfDate == 5 && dayComponentOfDate <= 20)) {
+            return constellation.金牛座
+            
+        } else if ((monthComponentOfDate == 5 && dayComponentOfDate >= 21) || (monthComponentOfDate == 6 && dayComponentOfDate <= 21)) {
+            return constellation.雙子座
+            
+        } else if ((monthComponentOfDate == 6 && dayComponentOfDate >= 22) || (monthComponentOfDate == 7 && dayComponentOfDate <= 22)) {
+            return constellation.巨蟹座
+            
+        } else if ((monthComponentOfDate == 7 && dayComponentOfDate >= 23) || (monthComponentOfDate == 8 && dayComponentOfDate <= 22)) {
+            return constellation.獅子座
+            
+        } else if ((monthComponentOfDate == 8 && dayComponentOfDate >= 23) || (monthComponentOfDate == 9 && dayComponentOfDate <= 22)) {
+            return constellation.處女座
+            
+        } else if ((monthComponentOfDate == 9 && dayComponentOfDate >= 23) || (monthComponentOfDate == 10 && dayComponentOfDate <= 22)) {
+            return constellation.天秤座
+            
+        } else if ((monthComponentOfDate == 10 && dayComponentOfDate >= 23) || (monthComponentOfDate == 11 && dayComponentOfDate <= 21)) {
+            return constellation.天蠍座
+            
+        } else if ((monthComponentOfDate == 11 && dayComponentOfDate >= 22) || (monthComponentOfDate == 12 && dayComponentOfDate <= 21)) {
+            return constellation.射手座
+            
+        } else {
+            return constellation.摩羯座
+            
+        }
+        }()
+        constellationLabel.text = zodiac.rawValue
+        selectedConstellation = zodiac.getZodiac()
+    }
     
+}
+
+
+//讓 Date() 可以取到個別月份、日
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
 }

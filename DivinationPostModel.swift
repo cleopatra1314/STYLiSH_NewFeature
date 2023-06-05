@@ -19,7 +19,7 @@ struct DivinationUserRequestBody: Codable{
 
 
 struct DivinationUserPostResponse: Codable{
-    let strawsStory: [StrawsStory]
+    let strawsStory: StrawsStory
     let couponId: Int
     let couponName: String
     let description: String
