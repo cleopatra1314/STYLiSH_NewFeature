@@ -142,7 +142,6 @@
 		C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */; };
 		C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */; };
 		C8BCFCBD2A2CBF7400839E5C /* DivinationPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */; };
-		C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -296,7 +295,6 @@
 		C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationPostModel.swift; sourceTree = "<group>"; };
-		C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -557,16 +555,7 @@
 		3CD29110221135E2008B8A2D = {
 			isa = PBXGroup;
 			children = (
-				C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */,
-				C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */,
-				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
 				C8A24C5B2A2C510E00D85B6A /* draw.gif */,
-				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
-				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
-				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
-				C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */,
-				C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */,
-				C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */,
 				3CD2911B221135E2008B8A2D /* STYLiSH */,
 				3CD2911A221135E2008B8A2D /* Products */,
 				F26A8A19BFED7C956C38BFE8 /* Frameworks */,
@@ -607,6 +596,7 @@
 				3CC706132216B32700CAD850 /* Product */,
 				3C1ACFE722152D10005583E2 /* Profile */,
 				3C0DD87B2213531400F5237E /* Lobby */,
+				C2358DA52A2DEE0400210AF7 /* Divination */,
 				3CD29125221135E3008B8A2D /* LaunchScreen.storyboard */,
 				3CED80922301204200B7DA8E /* Auth.storyboard */,
 				3C09F5112211435B00C5B3E2 /* Lobby.storyboard */,
@@ -614,12 +604,6 @@
 				3CD29120221135E2008B8A2D /* Main.storyboard */,
 				3CED80A82301256200B7DA8E /* Profile.storyboard */,
 				3CED80B12301301300B7DA8E /* Trolley.storyboard */,
-				C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */,
-				C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */,
-				C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */,
-				C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */,
-				C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */,
-				C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -764,6 +748,35 @@
 				3CA25518222A484300B286F6 /* ProductsListProvider.swift */,
 			);
 			path = APIProviders;
+			sourceTree = "<group>";
+		};
+		C2358DA52A2DEE0400210AF7 /* Divination */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
+				C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */,
+				C2358DA62A2DEE3600210AF7 /* TableViewCell */,
+				C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */,
+				C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */,
+				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
+			);
+			path = Divination;
+			sourceTree = "<group>";
+		};
+		C2358DA62A2DEE3600210AF7 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
+				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
+				C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */,
+				C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */,
+				C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */,
+				C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */,
+				C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */,
+				C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */,
+				C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		F26A8A19BFED7C956C38BFE8 /* Frameworks */ = {
@@ -937,7 +950,6 @@
 				3CE7A519223064C7009FF003 /* UserObject.swift in Sources */,
 				3CB801272229AFF10029A552 /* UICollectionView+Extension.swift in Sources */,
 				3C8F191B22E5BA9F00EECE90 /* LobbyView.swift in Sources */,
-				C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */,
 				3C6FABF522FD39EB00226316 /* STOrderProductCellViewModel.swift in Sources */,
 				3CED4C0C22141E9700121D4B /* MarketProvider.swift in Sources */,
 				3C831C6022E9945500112298 /* STOrderProductCell.swift in Sources */,

@@ -58,7 +58,7 @@ extension STTabBarViewController {
             case .lobby: controller = UIStoryboard.lobby.instantiateInitialViewController()!
             case .product: controller = UIStoryboard.product.instantiateInitialViewController()!
 //            case .divination: controller = UIStoryboard.divination.instantiateInitialViewController()!
-            case.divination: controller = STTransparentNavigationController(rootViewController: DivinationViewController())
+            case .divination: controller = STTransparentNavigationController(rootViewController: DivinationViewController())
             case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
             case .trolley: controller = UIStoryboard.trolley.instantiateInitialViewController()!
             }

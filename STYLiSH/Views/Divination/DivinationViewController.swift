@@ -44,17 +44,13 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         //隱藏 navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = .white
-//        navigationController?.navigationBar.barTintColor = .white
         
         setTableView()
-        
     }
-    
     
     override func viewDidLayoutSubviews() {
         divinationTableView.separatorStyle = .none
     }
-    
     
     func setTableView(){
         
@@ -68,7 +64,6 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         ])
         
     }
-   
     
     @objc func postDivinationData(){
         
@@ -81,45 +76,18 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         let colorCell = divinationTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! ColorTableViewCell
         selectedColorHex = arrayOfColor[colorCell.indexOfSelectedColor!]
         
-        
-        var request = URLRequest(url: URL(string: "https://hyperushle.com/api/ios/divination")!,timeoutInterval: Double.infinity)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let encoder = JSONEncoder()
-        let userImportData = STSuccessParser(data:DivinationUserRequestBody(birthday: selectedDateString!, sign: selectedConstellation!, gender: selectedGender!, color: selectedColorHex!), paging: nil)
-        print("使用者輸入的資料為 \(userImportData)")
-        let data = try? encoder.encode(userImportData)
-
-        
-        request.httpMethod = "POST"
-        request.httpBody = data
-        
-        // Set httpBody
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data {
-                
-                let content = String(data: data, encoding: .utf8) ?? ""
-                
-                    do {
-                        let decoder = JSONDecoder()
-                        let divinationResponse = try decoder.decode(STSuccessParser<DivinationUserPostResponse>.self, from: data)
-                     
-                    } catch  {
-                        print(error)
-                    }
-                }
+        let userData = STSuccessParser(data: DivinationRequestBody(birthday: "YYYY-MM-DD",
+                                                                   sign: "String",
+                                                                   gender: "men",
+                                                                   color: "#CCCCCC"), paging: nil)
+        DivinationProvider.shared.fetchDivinationResult(requestBody: userData) { [weak self] data in
+            DispatchQueue.main.async {
+                let DivinationResultVC = DivinationResultViewController()
+                DivinationResultVC.data = data
+                self?.navigationController?.pushViewController(DivinationResultVC, animated: true)
+            }
         }
-        task.resume()
-
-        
-        //Click 占卜 button 後跳轉下一個畫面
-//        let DivinationResultVC = DivinationResultViewController()
-//        DivinationResultVC.view.backgroundColor = .white
-//        navigationController?.pushViewController(DivinationResultVC, animated: true)
     }
-    
-    
-    
 }
 
 
@@ -269,5 +237,4 @@ extension DivinationViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedGender = genderArray[row].getGender()
     }
-    
 }

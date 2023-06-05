@@ -49,7 +49,7 @@ class DivinationProvider {
     
     private init() {}
     
-    func fetchDivinationResult(completion: @escaping ((DivinationData) -> Void) ) {
+    func fetchDivinationResult(requestBody: STSuccessParser<DivinationRequestBody>, completion: @escaping ((DivinationData) -> Void) ) {
         let url = URL(string: "https://hyperushle.com/api/ios/divination")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

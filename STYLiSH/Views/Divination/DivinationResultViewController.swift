@@ -13,13 +13,7 @@ class DivinationResultViewController: STBaseViewController {
     private let cellTypes: [DivinationCellType] = [.poem, .coupon, .prodcut]
     private let userProvider = UserProvider()
     
-    var data: DivinationData? {
-        didSet {
-            DispatchQueue.main.async { [unowned self] in
-                tableView.reloadData()
-            }
-        }
-    }
+    var data: DivinationData?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -94,12 +88,6 @@ class DivinationResultViewController: STBaseViewController {
                            forCellReuseIdentifier: CouponTableViewCell.reuseIdentifier)
         tableView.register(RecommendedProductTableViewCell.self,
                            forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
-        
-        DivinationProvider.shared.fetchDivinationResult { [weak self] data in
-            guard let self = self else { return }
-            self.data = data
-            print(data)
-        }
     }
     
     private func onSTYLiSHSignIn(token: String) {
