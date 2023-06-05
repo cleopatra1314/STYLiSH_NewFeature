@@ -24,17 +24,17 @@ class DivinationResultViewController: STBaseViewController {
     private lazy var couponView: CouponView = {
         let view = CouponView()
         view.isHidden = true
-        if KeyChainManager.shared.token == nil {
-            view.toggle(isSignedIn: false)
-        } else {
-            view.toggle(isSignedIn: true)
-        }
+        if KeyChainManager.shared.token == nil { view.toggle(isSignedIn: false) } else { view.toggle(isSignedIn: true) }
+        
         view.dismissView = {
             view.isHidden = true
         }
+        
         view.popToRootView = { [weak self] in
             self?.navigationController?.popToRootViewController(animated: true)
+            // self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
         }
+        
         view.loginToFacebook = { [weak self] in
             guard let self = self else { return }
             userProvider.loginWithFaceBook(from: self, completion: { [weak self] result in
@@ -99,10 +99,12 @@ class DivinationResultViewController: STBaseViewController {
             switch result {
             case .success:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入成功")
-                DispatchQueue.main.async {
-                    self?.couponView.toggle(isSignedIn: true)
-                    self?.couponView.isHidden = false
-                }
+                // Log in success
+                self?.sendCouponPost()
+//                DispatchQueue.main.async {
+//                    self?.couponView.toggle(isSignedIn: true)
+//                    self?.couponView.isHidden = false
+//                }
             case .failure:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入失敗!")
             }
@@ -110,6 +112,24 @@ class DivinationResultViewController: STBaseViewController {
                 self?.presentingViewController?.dismiss(animated: false, completion: nil)
             }
         })
+    }
+    
+    private func sendCouponPost() {
+        guard let couponId = data?.couponId else { return }
+        DivinationProvider.shared.sendCouponId(couponId: couponId) { [weak self] statusCode, data in
+            if statusCode == 403 {
+                DispatchQueue.main.async {
+                    self?.couponView.toggle(isSignedIn: true)
+                    self?.couponView.changeTitleLabel(with: data)
+                    self?.couponView.isHidden = false
+                }
+            } else if statusCode == 200 {
+                DispatchQueue.main.async {
+                    self?.couponView.toggle(isSignedIn: true)
+                    self?.couponView.isHidden = false
+                }
+            }
+        }
     }
 }
 
@@ -161,7 +181,8 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
                 self?.navigationController?.popViewController(animated: true)
             }
             cell.showPopUpView = { [weak self] in
-                self?.couponView.isHidden = false
+                if KeyChainManager.shared.token == nil { self?.couponView.isHidden = false }
+                self?.sendCouponPost()
             }
             return cell
         case .prodcut:

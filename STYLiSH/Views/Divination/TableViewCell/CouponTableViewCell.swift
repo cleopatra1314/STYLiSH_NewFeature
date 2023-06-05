@@ -96,12 +96,10 @@ class CouponTableViewCell: UITableViewCell {
     var popViewController: (() -> Void)?
     
     @objc func redrawCoupon() {
-        print("redraw tapped")
         popViewController?()
     }
     
     @objc func receiveCoupon() {
-        print("receive tapped")
         showPopUpView?()
     }
     
