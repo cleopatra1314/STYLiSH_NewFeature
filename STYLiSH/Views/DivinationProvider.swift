@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct DivinationRequestBody: Codable {
+    let birthday: String
+    let sign: String
+    let gender: String
+    let color: String
+}
+
 struct DivinationData: Codable {
     struct StrawsStory: Codable {
         let type: String
@@ -43,14 +50,22 @@ class DivinationProvider {
     private init() {}
     
     func fetchDivinationResult(completion: @escaping ((DivinationData) -> Void) ) {
-        let url = URL(string: "http://54.153.203.119/api/1.0/ios/divination")!
+        let url = URL(string: "https://hyperushle.com/api/ios/divination")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        let bodyData = try! encoder.encode(STSuccessParser(data: DivinationRequestBody(birthday: "YYYY-MM-DD",
+                                                                                       sign: "String",
+                                                                                       gender: "men",
+                                                                                       color: "#CCCCCC"), paging: nil))
+        request.httpBody = bodyData
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data {
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(STSuccessParser<DivinationData>.self, from: data)
+                    print(response.data)
                     completion(response.data)
                 } catch {
                     print(error)

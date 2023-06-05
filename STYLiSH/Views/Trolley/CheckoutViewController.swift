@@ -66,6 +66,7 @@ class CheckoutViewController: STBaseViewController {
         tableView.lk_registerCellWithNib(identifier: STOrderProductCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STOrderUserInputCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STPaymentInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(CouponCell.self, forCellReuseIdentifier: CouponCell.reuseIdentifier)
         
         let headerXib = UINib(nibName: STOrderHeaderView.identifier, bundle: nil)
         tableView.register(headerXib, forHeaderFooterViewReuseIdentifier: STOrderHeaderView.identifier)
@@ -142,7 +143,11 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Section Header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 67.0
+        switch orderProvider.orderCustructor[section] {
+        case .coupon: return 0
+        default: return 67.0
+        }
+        //return 67.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -182,6 +187,10 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
             return mappingCellWtih(payment: "", at: indexPath)
         case .reciever:
             return mappingCellWtih(reciever: orderProvider.order.reciever, at: indexPath)
+        case .coupon:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CouponCell.reuseIdentifier, for: indexPath)
+            guard let couponCell = cell as? CouponCell else { return cell}
+            return couponCell
         }
     }
     

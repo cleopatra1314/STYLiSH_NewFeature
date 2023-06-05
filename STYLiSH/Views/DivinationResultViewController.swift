@@ -47,7 +47,9 @@ class DivinationResultViewController: STBaseViewController {
                 switch result {
                 case .success(let token):
                     self?.onSTYLiSHSignIn(token: token)
-                    view.isHidden = true
+                    DispatchQueue.main.async {
+                        view.isHidden = true
+                    }
                 case .failure:
                     LKProgressHUD.showSuccess(text: "Facebook 登入失敗!")
                 }
@@ -109,8 +111,10 @@ class DivinationResultViewController: STBaseViewController {
             switch result {
             case .success:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入成功")
-                self?.couponView.toggle(isSignedIn: true)
-                self?.couponView.isHidden = false
+                DispatchQueue.main.async {
+                    self?.couponView.toggle(isSignedIn: true)
+                    self?.couponView.isHidden = false
+                }
             case .failure:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入失敗!")
             }
@@ -158,16 +162,13 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
         case .poem:
             guard let cell = cell as? PoemTableViewCell else { return cell }
             cell.configure(with: "抽中\(data.strawsStory.type)！",
-                           subtitle: "風恬浪靜可行舟， \n恰是中秋月一輪， \n凡事不須多憂慮， \n福祿自有慶家門。") // data.strawsStory.story
+                           subtitle: data.strawsStory.story)
             return cell
         case .coupon:
             guard let cell = cell as? CouponTableViewCell else { return cell }
-            let validDate = data.validDate.split(separator: " ")[0]
-            
-            cell.configure(with: "恭喜您獲得\(data.couponName)折價卷乙張",
-                           couponNameText: "\(data.description)",
-                           couponDiscountText: "折$\(data.discount)",
-                           couponExpirationDateText: "有效期限 \(validDate)")
+            cell.configure(with: data.couponName,
+                           couponDiscountText: data.discount,
+                           couponExpirationDateText: data.validDate)
             cell.popViewController = { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }

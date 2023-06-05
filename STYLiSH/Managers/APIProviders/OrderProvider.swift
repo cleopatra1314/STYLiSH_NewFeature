@@ -11,18 +11,20 @@ class OrderProvider {
     enum OrderInfo {
         case products
         case reciever
+        case coupon
         case paymentInfo
         
         func title() -> String {
             switch self {
             case .products: return "結帳商品"
             case .reciever: return "收件資訊"
+            case .coupon: return "" //"使用折價卷"
             case .paymentInfo: return "付款詳情"
             }
         }
     }
     
-    let orderCustructor: [OrderInfo] = [.products, .reciever, .paymentInfo]
+    let orderCustructor: [OrderInfo] = [.products, .reciever, .coupon, .paymentInfo]
     
     let payments: [Payment] = [.cash, .credit]
     

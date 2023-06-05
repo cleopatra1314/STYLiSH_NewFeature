@@ -127,6 +127,7 @@
 		C2A35B672A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */; };
 		C2A35B692A2B0D2700F5CA13 /* DivinationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */; };
 		C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */; };
+		C2A35B6D2A2D7E4400F5CA13 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B6C2A2D7E4400F5CA13 /* CouponCell.swift */; };
 		C2CC8EDF2A29FB2D00DC8C8A /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */; };
 		C2CC8EE12A2A060A00DC8C8A /* PoemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */; };
 		C2CC8EE32A2A2CD200DC8C8A /* CouponTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */; };
@@ -268,6 +269,7 @@
 		C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductTableViewCell.swift; sourceTree = "<group>"; };
 		C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationProvider.swift; sourceTree = "<group>"; };
 		C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
+		C2A35B6C2A2D7E4400F5CA13 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemTableViewCell.swift; sourceTree = "<group>"; };
 		C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewCell.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				3C831C6322E9AF8F00112298 /* STOrderUserInputCell.xib */,
 				3C831C8822EAAF7A00112298 /* STPaymentInfoTableViewCell.swift */,
 				3C831C8922EAAF7A00112298 /* STPaymentInfoTableViewCell.xib */,
+				C2A35B6C2A2D7E4400F5CA13 /* CouponCell.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				3CB8011E22299B460029A552 /* STCompondViewController.swift in Sources */,
 				3CCB3BC4222AA8FD00976A1C /* ProductDetailViewController.swift in Sources */,
 				3C9EF5342213C5C800DEE152 /* HTTPClient.swift in Sources */,
+				C2A35B6D2A2D7E4400F5CA13 /* CouponCell.swift in Sources */,
 				3CEBE07C222F7A210064EF82 /* Int+Extension.swift in Sources */,
 				3CED80AE23012CE400B7DA8E /* NSLocalizedString+Extension.swift in Sources */,
 				3CA25519222A484300B286F6 /* ProductsListProvider.swift in Sources */,

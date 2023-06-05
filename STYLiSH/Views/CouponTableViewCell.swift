@@ -155,14 +155,23 @@ class CouponTableViewCell: UITableViewCell {
     }
     
     func configure(with title: String,
-                   couponNameText: String,
-                   couponDiscountText: String,
+                   couponDiscountText: Int,
                    couponExpirationDateText: String) {
-        titleLabel.text = title
-        couponName.text = couponNameText
-        couponDiscount.text = couponDiscountText
-        couponExpirationDate.text = couponExpirationDateText
-        couponImageView.image = UIImage(named: "deal items")
+        let validDate = couponExpirationDateText.split(separator: "T")[0]
+        
+        var couponNameText: String {
+            switch title {
+            case "deal items": return "特定品項"
+            case "fixed_amout": return "現金"
+            case "free_shipping": return "運費"
+            default: return ""
+            }
+        }
+        titleLabel.text = "恭喜您獲得\(couponNameText)折價卷乙張"
+        couponName.text = "\(couponNameText)折價卷"
+        couponDiscount.text = "折$\(couponDiscountText)"
+        couponExpirationDate.text = "有效期限 \(validDate)"
+        couponImageView.image = UIImage(named: title)
     }
 
 }

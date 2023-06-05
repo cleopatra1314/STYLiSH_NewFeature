@@ -119,9 +119,11 @@ class CouponView: UIView {
         if isSignedIn {
             titleLabel.text = "成功領取！"
             leaveButton.isHidden = false
+            loginButton.isHidden = true
         } else {
             titleLabel.text = "請先登入再領取"
             loginButton.isHidden = false
+            leaveButton.isHidden = true
         }
     }
 }
