@@ -124,6 +124,7 @@
 		3CED80AF2301301300B7DA8E /* Trolley.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED80B12301301300B7DA8E /* Trolley.storyboard */; };
 		3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAC67222EEF71C00785FAB /* String+Extension.swift */; };
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
+		C8A24C5C2A2C510E00D85B6A /* draw.gif in Resources */ = {isa = PBXBuildFile; fileRef = C8A24C5B2A2C510E00D85B6A /* draw.gif */; };
 		C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8AB46EE2A2A838E0043C379 /* Divination.storyboard */; };
 		C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */; };
 		C8BA70A92A2B2042003654E5 /* DivinationTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */; };
@@ -131,6 +132,8 @@
 		C8BA70AD2A2B29A0003654E5 /* BirthdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */; };
 		C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */; };
 		C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */; };
+		C8BCFCBD2A2CBF7400839E5C /* DivinationPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */; };
+		C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -266,6 +269,7 @@
 		3CFAC67222EEF71C00785FAB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STYLiSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
+		C8A24C5B2A2C510E00D85B6A /* draw.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = draw.gif; sourceTree = "<group>"; };
 		C8AB46EE2A2A838E0043C379 /* Divination.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Divination.storyboard; sourceTree = "<group>"; };
 		C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationViewController.swift; sourceTree = "<group>"; };
 		C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 		C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTableViewCell.swift; sourceTree = "<group>"; };
 		C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationPostModel.swift; sourceTree = "<group>"; };
+		C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -532,7 +538,10 @@
 		3CD29110221135E2008B8A2D = {
 			isa = PBXGroup;
 			children = (
+				C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */,
+				C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */,
 				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
+				C8A24C5B2A2C510E00D85B6A /* draw.gif */,
 				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
 				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
 				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
@@ -813,6 +822,7 @@
 				3C6020DE222B90DF00312958 /* ProductDetailLabelCell.xib in Resources */,
 				3CC7061B2216B36800CAD850 /* ProductCollectionViewCell.xib in Resources */,
 				3C4B10D022292732009942B7 /* card_amex@3x.png in Resources */,
+				C8A24C5C2A2C510E00D85B6A /* draw.gif in Resources */,
 				3C831C8B22EAAF7A00112298 /* STPaymentInfoTableViewCell.xib in Resources */,
 				3C4B10D722292732009942B7 /* card_unknown.png in Resources */,
 				3C4B10D822292732009942B7 /* card_mastercard@3x.png in Resources */,
@@ -899,6 +909,7 @@
 				3CE7A519223064C7009FF003 /* UserObject.swift in Sources */,
 				3CB801272229AFF10029A552 /* UICollectionView+Extension.swift in Sources */,
 				3C8F191B22E5BA9F00EECE90 /* LobbyView.swift in Sources */,
+				C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */,
 				3C6FABF522FD39EB00226316 /* STOrderProductCellViewModel.swift in Sources */,
 				3CED4C0C22141E9700121D4B /* MarketProvider.swift in Sources */,
 				3C831C6022E9945500112298 /* STOrderProductCell.swift in Sources */,
@@ -935,6 +946,7 @@
 				3CED4C0A2214192100121D4B /* Product.swift in Sources */,
 				3C33691A2227D20B008A5A7A /* UIView+Extension.swift in Sources */,
 				3CB8011E22299B460029A552 /* STCompondViewController.swift in Sources */,
+				C8BCFCBD2A2CBF7400839E5C /* DivinationPostModel.swift in Sources */,
 				3CCB3BC4222AA8FD00976A1C /* ProductDetailViewController.swift in Sources */,
 				3C9EF5342213C5C800DEE152 /* HTTPClient.swift in Sources */,
 				3CEBE07C222F7A210064EF82 /* Int+Extension.swift in Sources */,
@@ -1185,7 +1197,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FRH9H66G29;
+				DEVELOPMENT_TEAM = 8MUTKC7BV7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
@@ -1211,7 +1223,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FRH9H66G29;
+				DEVELOPMENT_TEAM = 8MUTKC7BV7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",

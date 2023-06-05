@@ -24,26 +24,25 @@ class ColorTableViewCell: UITableViewCell{
         
         return colorStack
     }()
+    var colorButtonsArray = [UIButton]()
+    
     
     func layoutColorBall(arrayOfColor: Array<String>){
         
         for index in 1...arrayOfColor.count{
-//            var colorBallButton: UIButton!{
-//                didSet{
-//                    colorBallButton.isSelected.toggle()
-//                }
-//            }
             let colorBallButton = UIButton()
-            colorBallButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            
-            colorBallButton.layer.borderWidth = colorBallButton.isSelected ? 2 : 0
+
+            colorBallButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            colorBallButton.layer.borderColor = UIColor.darkGray.cgColor
             colorBallButton.backgroundColor = UIColor.hexStringToUIColor(hex: arrayOfColor[index - 1])
+            colorBallButton.addTarget(self, action: #selector(colorButtonTouchUpInside), for: .touchUpInside)
 //            NSLayoutConstraint.activate([
 //                colorBallButton.heightAnchor.constraint(equalToConstant: 40),
 //                colorBallButton.widthAnchor.constraint(equalTo: colorBallButton.heightAnchor)
 //            ])
-//            colorBallButton.layer.cornerRadius = colorBallButton.frame.width / 2
+            colorBallButton.layer.cornerRadius = colorBallButton.frame.width / 2
             colorStack.addArrangedSubview(colorBallButton)
+            colorButtonsArray.append(colorBallButton)
         }
         
     }
@@ -62,6 +61,18 @@ class ColorTableViewCell: UITableViewCell{
             colorStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
         ])
         
+    }
+    
+    @objc func colorButtonTouchUpInside(sender: UIButton){
+        
+        sender.isSelected.toggle()
+        for button in colorButtonsArray{
+            if button != sender{
+                button.isSelected = false
+            }
+            button.layer.borderWidth = button.isSelected ? 2 : 0
+        }
+//        sender.layer.borderWidth = sender.isSelected ? 2 : 0
     }
     
 }

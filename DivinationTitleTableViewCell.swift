@@ -13,6 +13,7 @@ class DivinationTitleTableViewCell: UITableViewCell {
 
     let pageTitleLabel: UILabel = {
         let pageTitleLabel = UILabel()
+        pageTitleLabel.font = UIFont.systemFont(ofSize: 24)
         pageTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         return pageTitleLabel
         
@@ -40,6 +41,8 @@ class DivinationTitleTableViewCell: UITableViewCell {
             divinationImageView.heightAnchor.constraint(equalTo: divinationImageView.widthAnchor, multiplier: 102/174),
             divinationImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
+        
+        
     }
     
     

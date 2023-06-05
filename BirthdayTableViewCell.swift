@@ -80,7 +80,7 @@ class BirthdayTableViewCell: UITableViewCell{
             birthdayTextField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24),
             birthdayTextField.heightAnchor.constraint(equalToConstant: 32),
             constellationLabel.topAnchor.constraint(equalTo: birthdayTextField.bottomAnchor, constant: 8),
-            constellationLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24),
+            constellationLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             constellationLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
         ])
         
