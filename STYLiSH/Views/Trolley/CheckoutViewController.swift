@@ -10,6 +10,9 @@ import UIKit
 
 class CheckoutViewController: STBaseViewController {
     
+    var coupon: Coupons.Coupon?
+    var couponIndexPath: IndexPath?
+    
     private struct Segue {
         static let success = "SegueSuccess"
     }
@@ -201,6 +204,11 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
             let couponTableVC = CouponTableViewController()
+            couponTableVC.selectedCouponIndexPath = couponIndexPath
+            couponTableVC.passCoupon = { [weak self] indexPath, coupon in
+                self?.coupon = coupon
+                self?.couponIndexPath = indexPath
+            }
             navigationController?.pushViewController(couponTableVC, animated: true)
         }
     }

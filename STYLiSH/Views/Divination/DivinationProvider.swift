@@ -25,7 +25,7 @@ struct DivinationData: Codable {
     let couponName: String
     let description: String
     let discount: Int
-    let validDate: String
+    let validDate: String?
     let products: [Product]
     
     enum CodingKeys: String, CodingKey {
@@ -56,13 +56,37 @@ struct CouponMessage: Codable {
     let errors: String?
 }
 
+struct Coupons: Codable {
+    struct Coupon: Codable {
+        let id: Int
+        let type: String
+        let description: String
+        let discount: Int
+        let expireTime: String?
+        let used: Bool
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case type
+            case description
+            case discount
+            case expireTime = "expire_time"
+            case used
+        }
+    }
+    
+    let coupon: [Coupon]
+}
+
 class DivinationProvider {
     static let shared = DivinationProvider()
     
     private init() {}
     
+    let baseURL = "https://hyperushle.com/"
+    
     func fetchDivinationResult(requestBody: STSuccessParser<DivinationRequestBody>, completion: @escaping ((DivinationData) -> Void) ) {
-        let url = URL(string: "https://hyperushle.com/api/ios/divination")!
+        let url = URL(string: "\(baseURL)api/ios/divination")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -88,7 +112,7 @@ class DivinationProvider {
     
     func sendCouponId(couponId: Int, completion: @escaping ((Int, String) -> Void)) {
         guard let token = KeyChainManager.shared.token else { return }
-        let url = URL(string: "https://hyperushle.com/api/coupon")!
+        let url = URL(string: "\(baseURL)api/coupon")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -111,6 +135,29 @@ class DivinationProvider {
                         message = data.errors!
                     }
                     completion(response.statusCode, message)
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+    
+    func getCoupon(completion: @escaping (([Coupons.Coupon]) -> Void)) {
+        guard let token = KeyChainManager.shared.token else { return }
+        print(token)
+        let url = URL(string: "\(baseURL)api/cart/coupon")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            let response = response as! HTTPURLResponse
+            print(response.statusCode)
+            if let data {
+                do {
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(STSuccessParser<Coupons>.self, from: data)
+                    print(data)
+                    completion(data.data.coupon)
                 } catch {
                     print(error)
                 }

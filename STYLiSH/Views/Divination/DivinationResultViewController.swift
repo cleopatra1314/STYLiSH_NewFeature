@@ -32,7 +32,7 @@ class DivinationResultViewController: STBaseViewController {
         
         view.popToRootView = { [weak self] in
             self?.navigationController?.popToRootViewController(animated: true)
-            // self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
+            //self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
         }
         
         view.loginToFacebook = { [weak self] in
@@ -101,10 +101,6 @@ class DivinationResultViewController: STBaseViewController {
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入成功")
                 // Log in success
                 self?.sendCouponPost()
-//                DispatchQueue.main.async {
-//                    self?.couponView.toggle(isSignedIn: true)
-//                    self?.couponView.isHidden = false
-//                }
             case .failure:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入失敗!")
             }

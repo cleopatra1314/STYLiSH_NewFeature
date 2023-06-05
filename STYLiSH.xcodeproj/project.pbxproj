@@ -1252,7 +1252,7 @@
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay/TPDirectResource",
 				);
 				INFOPLIST_FILE = STYLiSH/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1278,7 +1278,7 @@
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay/TPDirectResource",
 				);
 				INFOPLIST_FILE = STYLiSH/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,13 +10,21 @@ import UIKit
 
 class CouponTableViewController: STBaseViewController {
     
-//    var data: DivinationData? {
-//        didSet {
-//            DispatchQueue.main.async { [unowned self] in
-//                tableView.reloadData()
-//            }
-//        }
-//    }
+    var data: [Coupons.Coupon]? {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    var selectedCouponIndexPath: IndexPath? {
+        didSet {
+            selectedCoupon = data?[selectedCouponIndexPath!.row]
+        }
+    }
+    var selectedCoupon: Coupons.Coupon?
+    var passCoupon: ((IndexPath?, Coupons.Coupon?) -> ())?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -30,8 +38,10 @@ class CouponTableViewController: STBaseViewController {
         
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(CouponCell.self, forCellReuseIdentifier: CouponCell.reuseIdentifier)
-        tableView.rowHeight = 150
+        tableView.rowHeight = 180
+        tableView.separatorStyle = .none
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -39,17 +49,51 @@ class CouponTableViewController: STBaseViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        
+        DivinationProvider.shared.getCoupon { [weak self] data in
+            self?.data = data
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        passCoupon?(selectedCouponIndexPath, selectedCoupon)
     }
 }
 
-extension CouponTableViewController: UITableViewDataSource {
+extension CouponTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        10 // data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CouponCell.reuseIdentifier, for: indexPath)
+        cell.selectionStyle = .none
         guard let couponCell = cell as? CouponCell else { return cell }
-        return cell
+        if let tempdata = data,
+           tempdata.count - 1 >= indexPath.row {
+            guard let data = data?[indexPath.row] else { return cell }
+            couponCell.configure(with: data.type,
+                                 couponDiscountText: data.discount,
+                                 couponExpirationDateText: data.expireTime)
+            
+        }
+        couponCell.updateCells = { [weak self] in
+            tableView.visibleCells.forEach { aCell in
+                guard let aCell = aCell as? CouponCell else { return }
+                if couponCell == aCell {
+                    aCell.selectCheckbox()
+                    self?.selectedCouponIndexPath = indexPath
+                } else {
+                    aCell.deselectCheckbox()
+                }
+            }
+        }
+        return couponCell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let couponCell = cell as? CouponCell else { return }
+        self.selectedCouponIndexPath == indexPath ? couponCell.selectCheckbox() : couponCell.deselectCheckbox()
     }
 }
