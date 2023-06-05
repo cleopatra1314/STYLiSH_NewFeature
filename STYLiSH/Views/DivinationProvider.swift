@@ -43,7 +43,7 @@ class DivinationProvider {
     private init() {}
     
     func fetchDivinationResult(completion: @escaping ((DivinationData) -> Void) ) {
-        let url = URL(string: "http://54.153.203.119//api/1.0/ios/divination")!
+        let url = URL(string: "http://54.153.203.119/api/1.0/ios/divination")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         URLSession.shared.dataTask(with: request) { data, response, error in
