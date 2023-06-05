@@ -8,9 +8,6 @@
 
 import Foundation
 
-struct TopData<T: Codable>: Codable {
-    let data: T
-}
 struct DivinationData: Codable {
     struct StrawsStory: Codable {
         let type: String

@@ -14,15 +14,19 @@ class PoemTableViewCell: UITableViewCell {
     private let labelsContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray5
+        view.lkCornerRadius = 20
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 2
         return view
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 24)
-        label.text = "抽中上上籤！"
+        label.font = .medium(size: 20)
         return label
     }()
     
@@ -30,7 +34,6 @@ class PoemTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .regular(size: 18)
-        label.text = "風恬浪靜可行舟， \n恰是中秋月一輪，\n凡事不須多憂慮， \n福祿自有慶家門。"
         label.numberOfLines = 0
         return label
     }()

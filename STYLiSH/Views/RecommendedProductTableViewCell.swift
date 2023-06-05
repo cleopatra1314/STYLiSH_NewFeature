@@ -43,7 +43,7 @@ class RecommendedProductTableViewCell: UITableViewCell {
     private let titlelabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 24)
+        label.font = .medium(size: 24)
         label.text = "推薦商品"
         return label
     }()
@@ -57,7 +57,8 @@ class RecommendedProductTableViewCell: UITableViewCell {
         // Set up the collection view constraints
         NSLayoutConstraint.activate([
             titlelabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titlelabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titlelabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            titlelabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             collectionView.topAnchor.constraint(equalTo: titlelabel.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

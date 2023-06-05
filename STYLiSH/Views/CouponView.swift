@@ -21,7 +21,7 @@ class CouponView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 20)
+        label.font = .regular(size: 18)
         label.text = "成功領取！"
         return label
     }()
@@ -38,6 +38,7 @@ class CouponView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("去商店逛逛", for: .normal)
         button.setTitleColor(.B1, for: .normal)
+        button.titleLabel?.font = .regular(size: 16)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.B1?.cgColor
         button.layer.cornerRadius = 10
@@ -50,6 +51,7 @@ class CouponView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("FaceBook登入", for: .normal)
         button.setTitleColor(.B1, for: .normal)
+        button.titleLabel?.font = .regular(size: 16)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.B1?.cgColor
         button.layer.cornerRadius = 10

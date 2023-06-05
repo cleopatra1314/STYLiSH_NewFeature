@@ -164,13 +164,12 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             guard let cell = cell as? CouponTableViewCell else { return cell }
             let validDate = data.validDate.split(separator: " ")[0]
             
-            cell.configure(with: "獲得\(data.couponName)折價卷乙張",
-                           couponNameText: "\(data.description)折價卷",
-                           couponDiscountText: "$\(data.discount)",
-                           couponExpirationDateText: "\(validDate)到期")
+            cell.configure(with: "恭喜您獲得\(data.couponName)折價卷乙張",
+                           couponNameText: "\(data.description)",
+                           couponDiscountText: "折$\(data.discount)",
+                           couponExpirationDateText: "有效期限 \(validDate)")
             cell.popViewController = { [weak self] in
-                self?.dismiss(animated: true)
-                // self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             }
             cell.showPopUpView = { [weak self] in
                 self?.couponView.isHidden = false
@@ -180,14 +179,11 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             guard let cell = cell as? RecommendedProductTableViewCell else { return cell }
             cell.data = data.products
             cell.showDetailPage = { [weak self] (indexPath) -> Void in
-                guard
-                    let self = self,
-                    let detailVC = UIStoryboard.product.instantiateViewController(
-                        withIdentifier: String(describing: ProductDetailViewController.self)
-                    ) as? ProductDetailViewController
-                else {
-                    return
-                }
+                guard let self = self,
+                      let detailVC = UIStoryboard.product.instantiateViewController(
+                            withIdentifier: String(describing: ProductDetailViewController.self)
+                      ) as? ProductDetailViewController
+                else { return }
                 detailVC.product = data.products[indexPath.row]
                 show(detailVC, sender: nil)
             }

@@ -14,36 +14,48 @@ class CouponTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 24)
+        label.font = .medium(size: 24)
         return label
     }()
     
     private let labelsContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray5
+        view.lkCornerRadius = 20
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 2
         return view
     }()
     
     private let couponName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 18)
+        label.font = .regular(size: 16)
         return label
     }()
     
     private let couponDiscount: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 18)
+        label.font = .regular(size: 16)
         return label
     }()
     
     private let couponExpirationDate: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .regular(size: 14)
+        label.font = .regular(size: 15)
         return label
+    }()
+    
+    private let couponImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     private let redoButton: UIButton = {
@@ -51,6 +63,7 @@ class CouponTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("重抽", for: .normal)
         button.setTitleColor(.B1, for: .normal)
+        button.titleLabel?.font = .regular(size: 16)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.B1?.cgColor
         button.layer.cornerRadius = 10
@@ -62,6 +75,7 @@ class CouponTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("領取", for: .normal)
         button.setTitleColor(.B1, for: .normal)
+        button.titleLabel?.font = .regular(size: 16)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.B1?.cgColor
         button.layer.cornerRadius = 10
@@ -74,7 +88,7 @@ class CouponTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.spacing = 4
+        stackView.spacing = 8
         return stackView
     }()
     
@@ -95,44 +109,44 @@ class CouponTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // Add the UI components to the cell's content view
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(labelsContainerView)
-        contentView.addSubview(buttonsStackView)
-        
-        labelsContainerView.addSubview(couponName)
-        labelsContainerView.addSubview(couponDiscount)
-        labelsContainerView.addSubview(couponExpirationDate)
-        
-        buttonsStackView.addArrangedSubview(redoButton)
-        buttonsStackView.addArrangedSubview(receiveButton)
+        [titleLabel, labelsContainerView, buttonsStackView].forEach { contentView.addSubview($0) }
+        [couponName, couponDiscount, couponExpirationDate, couponImageView].forEach {
+            labelsContainerView.addSubview($0)
+        }
+        [redoButton, receiveButton].forEach { buttonsStackView.addArrangedSubview($0) }
         
         redoButton.addTarget(self, action: #selector(redrawCoupon), for: .touchUpInside)
         receiveButton.addTarget(self, action: #selector(receiveCoupon), for: .touchUpInside)
         
         // Set up the constraints for the UI components
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            labelsContainerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            labelsContainerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             labelsContainerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            labelsContainerView.widthAnchor.constraint(equalToConstant: 250),
+            labelsContainerView.widthAnchor.constraint(equalToConstant: 280),
             labelsContainerView.heightAnchor.constraint(equalToConstant: 150),
             
-            couponName.topAnchor.constraint(equalTo: labelsContainerView.topAnchor, constant: 8),
-            couponName.centerXAnchor.constraint(equalTo: labelsContainerView.centerXAnchor),
+            couponImageView.centerYAnchor.constraint(equalTo: labelsContainerView.centerYAnchor),
+            couponImageView.leadingAnchor.constraint(equalTo: labelsContainerView.leadingAnchor, constant: 24),
+            couponImageView.heightAnchor.constraint(equalToConstant: 80),
+            couponImageView.widthAnchor.constraint(equalTo: couponImageView.heightAnchor, multiplier: 1),
             
-            couponDiscount.centerXAnchor.constraint(equalTo: labelsContainerView.centerXAnchor),
-            couponDiscount.centerYAnchor.constraint(equalTo: labelsContainerView.centerYAnchor),
-            couponDiscount.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: -8),
+            couponName.topAnchor.constraint(equalTo: couponImageView.topAnchor, constant: -4),
+            couponName.leadingAnchor.constraint(equalTo: couponImageView.trailingAnchor, constant: 16),
             
-            couponExpirationDate.trailingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor, constant: -8),
-            couponExpirationDate.bottomAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: -8),
+            couponDiscount.centerYAnchor.constraint(equalTo: couponImageView.centerYAnchor),
+            couponDiscount.leadingAnchor.constraint(equalTo: couponName.leadingAnchor),
             
-            buttonsStackView.topAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: 8),
+            couponExpirationDate.leadingAnchor.constraint(equalTo: couponName.leadingAnchor),
+            couponExpirationDate.bottomAnchor.constraint(equalTo: couponImageView.bottomAnchor, constant: 4),
+            
+            buttonsStackView.topAnchor.constraint(equalTo: labelsContainerView.bottomAnchor, constant: 16),
             buttonsStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 40),
             buttonsStackView.widthAnchor.constraint(equalTo: labelsContainerView.widthAnchor, multiplier: 1),
-            buttonsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            buttonsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
     
@@ -148,6 +162,7 @@ class CouponTableViewCell: UITableViewCell {
         couponName.text = couponNameText
         couponDiscount.text = couponDiscountText
         couponExpirationDate.text = couponExpirationDateText
+        couponImageView.image = UIImage(named: "deal items")
     }
 
 }
