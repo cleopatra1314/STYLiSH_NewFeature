@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class DivinationTitleTableViewCell: UITableViewCell {
-    
 
     let pageTitleLabel: UILabel = {
         let pageTitleLabel = UILabel()
@@ -52,20 +51,5 @@ class DivinationTitleTableViewCell: UITableViewCell {
             divinationImageView.heightAnchor.constraint(equalTo: divinationImageView.widthAnchor, multiplier: 102/174),
             divinationImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
-        
-        
     }
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

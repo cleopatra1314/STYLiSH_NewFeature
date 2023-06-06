@@ -21,6 +21,8 @@ class DivinationResultViewController: STBaseViewController {
         return tableView
     }()
     
+    private let cupView: CupView = CupView()
+    
     private lazy var couponView: CouponView = {
         let view = CouponView()
         view.isHidden = true
@@ -65,6 +67,7 @@ class DivinationResultViewController: STBaseViewController {
         // Add the table view to the view controller's view
         view.addSubview(tableView)
         view.addSubview(couponView)
+        animateCupView()
         
         // Set up the table view constraints
         NSLayoutConstraint.activate([
@@ -88,6 +91,28 @@ class DivinationResultViewController: STBaseViewController {
                            forCellReuseIdentifier: CouponTableViewCell.reuseIdentifier)
         tableView.register(RecommendedProductTableViewCell.self,
                            forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
+    }
+    
+    private func animateCupView() {
+        view.addSubview(cupView)
+        guard let data = data else { return }
+        cupView.configure(title: "抽中\(data.strawsStory.type)", subtitle: data.strawsStory.story)
+        NSLayoutConstraint.activate([
+            cupView.topAnchor.constraint(equalTo: view.topAnchor, constant: -50),
+            cupView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -50),
+            cupView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 50),
+            cupView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50),
+        ])
+        let animator = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
+            self.cupView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            self.cupView.alpha = 0.0
+        }
+        animator.startAnimation(afterDelay: 2)
+        animator.addCompletion { _ in
+            self.cupView.transform = .identity
+            self.cupView.alpha = 1.0
+            self.cupView.removeFromSuperview()
+        }
     }
     
     private func onSTYLiSHSignIn(token: String) {
