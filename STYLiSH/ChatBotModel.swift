@@ -10,9 +10,18 @@ import Foundation
 
 
 enum ChatBotSenderType: String{
+    case userReplyForDress
+    case userReplyForJeans
+    case userReplyForHots
+    case userReplyForNew
+    case userReplyForDivination
     case dress
     case jeans
     case hots
     case new
     case divination
+}
+
+struct DataOfChatBotSenderType: Codable{
+    let type: String
 }

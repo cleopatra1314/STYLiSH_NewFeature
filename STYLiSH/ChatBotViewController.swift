@@ -70,7 +70,7 @@ class ChatBotViewController: STBaseViewController{
         
         return bottomCollectionView
     }()
-    let canMessageTitleArray = ["推薦洋裝", "推薦牛仔褲", "熱門推薦", "優惠活動詢問", "最新流行",]
+    let canMessageTitleArray = ["推薦洋裝", "推薦牛仔褲", "熱門推薦", "最新流行", "優惠活動詢問"]
     
     
     override func viewDidLoad() {
@@ -125,6 +125,7 @@ class ChatBotViewController: STBaseViewController{
         
         chatBotTableView.register(DressTableViewCell.self, forCellReuseIdentifier: "\(DressTableViewCell.self)")
         chatBotTableView.register(PromotionTableViewCell.self, forCellReuseIdentifier: "\(PromotionTableViewCell.self)")
+        chatBotTableView.register(UserChatTableViewCell.self, forCellReuseIdentifier: "\(UserChatTableViewCell.self)")
         
         self.view.addSubview(chatBotTableView)
         
@@ -232,6 +233,25 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
             cell.layoutCell()
             return cell
             
+        case "userReplyForDress", "userReplyForJeans", "userReplyForHots", "userReplyForNew", "userReplyForDivination":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(UserChatTableViewCell.self)", for: indexPath) as! UserChatTableViewCell
+            if dataType == "userReplyForDress"{
+                cell.dialogTextView.text = "推我洋裝"
+            
+            }else if dataType == "userReplyForJeans"{
+                cell.dialogTextView.text = "推我牛仔褲"
+               
+            }else if dataType == "userReplyForHots"{
+                cell.dialogTextView.text = "我要熱門"
+              
+            }else if dataType == "userReplyForNew"{
+                cell.dialogTextView.text = "給我新品"
+            }else{
+                cell.dialogTextView.text = "給我優惠"
+            }
+            cell.layoutCell()
+            return cell
+            
         default:
             //TODO: 待修改
             let cell = ChatBotTableViewCell.init(style: .default, reuseIdentifier: nil)
@@ -267,23 +287,75 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.twitClosure = { collectionViewCell in
             let indexOfSelectedCanMessage = self.bottomCollectionView.indexPath(for: collectionViewCell)
+//            var parameters: STSuccessParser<DataOfChatBotSenderType>?
             
-            switch indexOfSelectedCanMessage?.item{
-            case 0:
-                self.dataTypeArray.append(ChatBotSenderType.dress.rawValue)
-            case 1:
+//            switch indexOfSelectedCanMessage?.item{
+//            case 0:
+//                self.dataTypeArray += [ChatBotSenderType.userReplyForDress.rawValue, ChatBotSenderType.dress.rawValue]
+//                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "dress"), paging: nil)
+//            case 1:
+//                self.dataTypeArray.append(ChatBotSenderType.userReplyForJeans.rawValue)
+//                self.dataTypeArray.append(ChatBotSenderType.jeans.rawValue)
+//                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "jeans"), paging: nil)
+//            case 2:
+//                self.dataTypeArray.append(ChatBotSenderType.userReplyForHots.rawValue)
+//                self.dataTypeArray.append(ChatBotSenderType.hots.rawValue)
+//                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "hots"), paging: nil)
+//            case 3:
+//                self.dataTypeArray.append(ChatBotSenderType.userReplyForNew.rawValue)
+//                self.dataTypeArray.append(ChatBotSenderType.new.rawValue)
+//                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "new"), paging: nil)
+//            case 4:
+//                self.dataTypeArray.append(ChatBotSenderType.userReplyForDivination.rawValue)
+//                self.dataTypeArray.append(ChatBotSenderType.divination.rawValue)
+//                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "divination"), paging: nil)
+//            default:
+//                return
+//            }
+            if indexOfSelectedCanMessage?.item == 0{
+                self.dataTypeArray += [ChatBotSenderType.userReplyForDress.rawValue, ChatBotSenderType.dress.rawValue]
+                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "dress"), paging: nil)
+                
+                //串接 post api
+//                let postData = parameters.data(using: .utf8)
+                let postData = try? JSONEncoder().encode(parameters)
+
+                var request = URLRequest(url: URL(string: "https://hyperushle.com/api/ios/chatbox")!,timeoutInterval: Double.infinity)
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+                request.httpMethod = "POST"
+                request.httpBody = postData
+
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                  guard let data = data else {
+                    print(String(describing: error))
+                    return
+                  }
+                  print("拿到的資料為 \(String(data: data, encoding: .utf8)!)")
+                }
+                task.resume()
+                
+            }else if indexOfSelectedCanMessage?.item == 1{
+                self.dataTypeArray.append(ChatBotSenderType.userReplyForJeans.rawValue)
                 self.dataTypeArray.append(ChatBotSenderType.jeans.rawValue)
-            case 2:
+                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "jeans"), paging: nil)
+            }else if indexOfSelectedCanMessage?.item == 2{
+                self.dataTypeArray.append(ChatBotSenderType.userReplyForHots.rawValue)
                 self.dataTypeArray.append(ChatBotSenderType.hots.rawValue)
-            case 3:
+                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "hots"), paging: nil)
+            }else if indexOfSelectedCanMessage?.item == 3{
+                self.dataTypeArray.append(ChatBotSenderType.userReplyForNew.rawValue)
                 self.dataTypeArray.append(ChatBotSenderType.new.rawValue)
-            case 4:
+                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "new"), paging: nil)
+            }else{
+                self.dataTypeArray.append(ChatBotSenderType.userReplyForDivination.rawValue)
                 self.dataTypeArray.append(ChatBotSenderType.divination.rawValue)
-            default:
-                return
+                let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "divination"), paging: nil)
             }
+                            
             self.chatBotTableView.reloadData()
-            print(self.dataTypeArray)
+            print("目前的 dataTypeArray 為 \(self.dataTypeArray)")
+            
         }
         
         return cell
