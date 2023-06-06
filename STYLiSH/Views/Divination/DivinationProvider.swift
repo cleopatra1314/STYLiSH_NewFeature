@@ -76,6 +76,21 @@ struct Coupons: Codable {
     }
     
     let coupon: [Coupon]
+    
+    enum CouponType {
+        case dealItems
+        case freeShipping
+        case cash
+        
+        static func getCouponType(for type: String) -> CouponType {
+            switch type {
+            case "deal items": return .dealItems
+            case "fixed_amout": return .cash
+            case "free_shipping": return .freeShipping
+            default: return .cash
+            }
+        }
+    }
 }
 
 class DivinationProvider {
@@ -101,7 +116,6 @@ class DivinationProvider {
                 do {
                     let decoder = JSONDecoder()
                     let response = try decoder.decode(STSuccessParser<DivinationData>.self, from: data)
-                    print(response.data)
                     completion(response.data)
                 } catch {
                     print(error)
@@ -144,19 +158,15 @@ class DivinationProvider {
     
     func getCoupon(completion: @escaping (([Coupons.Coupon]) -> Void)) {
         guard let token = KeyChainManager.shared.token else { return }
-        print(token)
         let url = URL(string: "\(baseURL)api/cart/coupon")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
-            let response = response as! HTTPURLResponse
-            print(response.statusCode)
             if let data {
                 do {
                     let decoder = JSONDecoder()
                     let data = try decoder.decode(STSuccessParser<Coupons>.self, from: data)
-                    print(data)
                     completion(data.data.coupon)
                 } catch {
                     print(error)

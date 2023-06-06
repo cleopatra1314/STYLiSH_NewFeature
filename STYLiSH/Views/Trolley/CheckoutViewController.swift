@@ -83,7 +83,7 @@ class CheckoutViewController: STBaseViewController {
             return onShowLogin()
         }
         
-        switch orderProvider.order.payment {
+        switch orderProvider.order.paymentType {
         case .credit: checkoutWithTapPay()
         case .cash: checkoutWithCash()
         }
@@ -130,7 +130,7 @@ class CheckoutViewController: STBaseViewController {
     }
     
     func canCheckout() -> Bool {
-        switch orderProvider.order.payment {
+        switch orderProvider.order.paymentType {
         case .cash: return orderProvider.order.isReady()
         case .credit: return orderProvider.order.isReady() && isCanGetPrime
         }
@@ -201,6 +201,7 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // MARK: - CouponTableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
             let couponTableVC = CouponTableViewController()
@@ -208,6 +209,31 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
             couponTableVC.passCoupon = { [weak self] indexPath, coupon in
                 self?.coupon = coupon
                 self?.couponIndexPath = indexPath
+                
+                let couponCheckoutCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? CouponCheckoutCell
+                guard let aCoupon = self?.coupon else {
+                    self?.orderProvider.order.freightDiscount = 0
+                    self?.orderProvider.order.productPriceDiscount = 0
+                    self?.orderProvider.order.couponId = nil
+                    couponCheckoutCell?.selectedCouponView.configure(hasCoupon: false)
+                    tableView.reloadData()
+                    return
+                }
+                let couponType = Coupons.CouponType.getCouponType(for: aCoupon.type)
+                self?.orderProvider.order.couponId = aCoupon.id
+                
+                couponCheckoutCell?.selectedCouponView.configure(hasCoupon: true)
+                couponCheckoutCell?.selectedCouponView.configure(with: aCoupon.type,
+                                                                couponDiscountText: aCoupon.discount,
+                                                                couponExpirationDateText: aCoupon.expireTime)
+                
+                switch couponType {
+                case .freeShipping:
+                    self?.orderProvider.order.freightDiscount = aCoupon.discount
+                default:
+                    self?.orderProvider.order.productPriceDiscount = aCoupon.discount
+                }
+                tableView.reloadData()
             }
             navigationController?.pushViewController(couponTableVC, animated: true)
         }
@@ -259,10 +285,10 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
         inputCell.creditView.stickSubView(tappayVC.view)
         inputCell.delegate = self
         inputCell.layoutCellWith(
-            productPrice: orderProvider.order.productPrices,
-            shipPrice: orderProvider.order.freight,
+            productPrice: orderProvider.order.productPricesToDisplay,
+            shipPrice: orderProvider.order.freightToDisplay,
             productCount: orderProvider.order.amount,
-            payment: orderProvider.order.payment.title(),
+            payment: orderProvider.order.paymentType.title(),
             isCheckoutEnable: canCheckout()
         )
         inputCell.checkoutBtn.isEnabled = canCheckout()
@@ -289,7 +315,7 @@ extension CheckoutViewController: STPaymentInfoTableViewCellDelegate {
     }
     
     func didChangePaymentMethod(_ cell: STPaymentInfoTableViewCell, index: Int) {
-        orderProvider.order.payment = orderProvider.payments[index]
+        orderProvider.order.paymentType = orderProvider.payments[index]
         updateCheckoutButton()
     }
     
@@ -315,11 +341,20 @@ extension CheckoutViewController: STPaymentInfoTableViewCellDelegate {
 extension CheckoutViewController: STOrderUserInputCellDelegate {
     
     func didChangeUserData(_ cell: STOrderUserInputCell, data: STOrderUserInputCellModel) {
+        var time: String
+        switch data.shipTime {
+        case "08:00-12:00": time = "morning"
+        case "14:00-18:00": time = "afternoon"
+        case "不指定": time = "anytime"
+        default: time = "morning"
+        }
+        
         let newReciever = Reciever(
             name: data.username,
             email: data.email,
             phoneNumber: data.phoneNumber,
             address: data.address,
+            time: time,
             shipTime: data.shipTime
         )
         orderProvider.order.reciever = newReciever

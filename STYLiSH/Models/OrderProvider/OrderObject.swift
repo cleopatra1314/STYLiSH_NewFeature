@@ -23,6 +23,7 @@ struct Order: Encodable {
         case totalPrice = "total"
         case reciever = "recipient"
         case list
+        case couponId = "coupon_id"
     }
 
     func encode(to encoder: Encoder) throws {
@@ -34,6 +35,7 @@ struct Order: Encodable {
         try container.encode(totalPrice, forKey: .totalPrice)
         try container.encode(reciever, forKey: .reciever)
         try container.encode(list, forKey: .list)
+        try container.encode(couponId, forKey: .couponId)
     }
     
     var list: [OrderListObject] {
@@ -46,10 +48,11 @@ struct Order: Encodable {
             else {
                 return nil
             }
+            
             let orderObject = OrderListObject(
                 id: String(object.id),
-                name: name, price:
-                Int(object.price),
+                name: name,
+                price: Int(object.price),
                 color: color,
                 size: size,
                 qty: Int(product.amount)
@@ -60,23 +63,47 @@ struct Order: Encodable {
     
     var products: [LSOrder] = []
     var reciever: Reciever = Reciever()
-    var deliverTime: String = "08:00-12:00"
-    var payment: Payment = .cash
-
+    var deliverTime: String = "delivery"
+    var payment: String = "cash"
+    var paymentType: Payment = .cash {
+        didSet {
+            payment = paymentType.toString()
+        }
+    }
+    
+    var productPriceDiscount: Int?
+    var freightDiscount: Int?
+    var couponId: Int?
+    
     var productPrices: Int {
-            var price = 0
-            for item in products {
-                price += Int(item.product!.price) * Int(item.amount)
-            }
-            return price
+        var price = 0
+        for item in products {
+            price += Int(item.product!.price) * Int(item.amount)
+        }
+        return price
     }
 
     var freight: Int {
         return products.count * 60
     }
+    
+    var freightToDisplay: Int {
+        var price = products.count * 60
+        price -= freightDiscount ?? 0
+        return price
+    }
+    
+    var productPricesToDisplay: Int {
+        var price = 0
+        for item in products {
+            price += Int(item.product!.price) * Int(item.amount)
+        }
+        price -= productPriceDiscount ?? 0
+        return price
+    }
 
     var totalPrice: Int {
-        return productPrices + freight
+        return productPricesToDisplay + freightToDisplay
     }
 
     var amount: Int {
@@ -103,13 +130,15 @@ struct Reciever: Codable {
         case email
         case phoneNumber = "phone"
         case address
-        case shipTime = "time"
+        case time
+        case shipTime
     }
     
     var name: String = .empty
     var email: String = .empty
     var phoneNumber: String = .empty
     var address: String = .empty
+    var time: String = .empty
     var shipTime: String = .empty
 
     func isReady() -> Bool {
@@ -133,6 +162,13 @@ enum Payment: String, Codable {
         switch self {
         case .cash: return NSLocalizedString("貨到付款")
         case .credit: return NSLocalizedString("信用卡付款")
+        }
+    }
+    
+    func toString() -> String {
+        switch self {
+        case .cash: return "cash"
+        case .credit: return "credit_card"
         }
     }
 }

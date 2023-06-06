@@ -54,7 +54,8 @@ class CouponTableViewController: STBaseViewController {
         ])
         
         DivinationProvider.shared.getCoupon { [weak self] data in
-            self?.data = data
+            let unusedCoupons = data.filter { $0.used == false }
+            self?.data = unusedCoupons
         }
     }
     
@@ -66,7 +67,7 @@ class CouponTableViewController: STBaseViewController {
 
 extension CouponTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10 // data?.count ?? 0
+        data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,8 +86,13 @@ extension CouponTableViewController: UITableViewDataSource, UITableViewDelegate 
             tableView.visibleCells.forEach { aCell in
                 guard let aCell = aCell as? CouponCell else { return }
                 if couponCell == aCell {
-                    aCell.selectCheckbox()
-                    self?.selectedCouponIndexPath = indexPath
+                    if self?.selectedCouponIndexPath == indexPath {
+                        aCell.deselectCheckbox()
+                        self?.selectedCouponIndexPath = nil
+                    } else {
+                        aCell.selectCheckbox()
+                        self?.selectedCouponIndexPath = indexPath
+                    }
                 } else {
                     aCell.deselectCheckbox()
                 }

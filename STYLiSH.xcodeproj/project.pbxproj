@@ -126,6 +126,7 @@
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
 		C2358DA22A2DC77F00210AF7 /* CouponTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */; };
 		C2358DA42A2DC88C00210AF7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA32A2DC88C00210AF7 /* CouponCell.swift */; };
+		C2358DA82A2F1D3100210AF7 /* SelectedCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */; };
 		C2A35B672A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */; };
 		C2A35B692A2B0D2700F5CA13 /* DivinationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */; };
 		C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */; };
@@ -279,6 +280,7 @@
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
 		C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewController.swift; sourceTree = "<group>"; };
 		C2358DA32A2DC88C00210AF7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
+		C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCouponView.swift; sourceTree = "<group>"; };
 		C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductTableViewCell.swift; sourceTree = "<group>"; };
 		C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationProvider.swift; sourceTree = "<group>"; };
 		C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 				3C831C8922EAAF7A00112298 /* STPaymentInfoTableViewCell.xib */,
 				C2A35B6C2A2D7E4400F5CA13 /* CouponCheckoutCell.swift */,
 				C2358DA32A2DC88C00210AF7 /* CouponCell.swift */,
+				C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -1031,6 +1034,7 @@
 				3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */,
 				3C33863F221BB2B800ED97E4 /* ProductListViewController.swift in Sources */,
 				3C6020E6222BB03400312958 /* STBaseViewController.swift in Sources */,
+				C2358DA82A2F1D3100210AF7 /* SelectedCouponView.swift in Sources */,
 				C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */,
 				3CEBE07E222F979F0064EF82 /* JGProgressHUDWrapper.swift in Sources */,
 				3CCB3BC6222AAC8300976A1C /* LKGalleryView.swift in Sources */,
