@@ -33,7 +33,7 @@ class LobbyViewController: STBaseViewController {
         self.navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
         
         //navigation controller 加入 chatBot icon
-        let chatBotButton = UIBarButtonItem(image: UIImage(named: "Icon_chatbot.png"), style: .plain, target: self, action: #selector(chatBotButtonTouchUpInside))
+        let chatBotButton = UIBarButtonItem(image: UIImage(named: "chatbot_icon_small.png"), style: .plain, target: self, action: #selector(chatBotButtonTouchUpInside))
         self.navigationItem.leftBarButtonItem = chatBotButton
         
         lobbyView.beginHeaderRefresh()
@@ -57,7 +57,7 @@ class LobbyViewController: STBaseViewController {
 //        chatBotVC.modalTransitionStyle = .partialCurl
 //        chatBotVC.modalPresentationStyle = .fullScreen
 //        navigationController?.pushViewController(chatBotVC, animated: true)
-        
+
         let navigationControllerOfChatBot = UINavigationController(rootViewController: chatBotVC)
         present(navigationControllerOfChatBot, animated: true)
     }
