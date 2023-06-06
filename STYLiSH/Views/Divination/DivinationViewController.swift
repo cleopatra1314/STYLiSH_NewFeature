@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class DivinationViewController: UIViewController, UITextFieldDelegate{
     
     let divinationTableView: UITableView = {
@@ -111,11 +110,12 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             guard let titleCell = cell as? DivinationTitleTableViewCell else { return cell }
                 
             titleCell.pageTitleLabel.text = "優惠占卜"
-            titleCell.divinationImageView.image = UIImage(named: "draw.png")
+//            titleCell.divinationImageView.image = UIImage(named: "draw.png")
 //            titleCell.divinationImageView.contentMode = .scaleAspectFit
             titleCell.layoutCell()
             
-            // 加入 gif 圖
+            //加入 gif 圖
+            
 //            if let url = Bundle.main.url(forResource: "draw", withExtension: "gif"){
 //                let cfUrl = url as CFURL
 //                CGAnimateImageAtURLWithBlock(cfUrl, nil) { (_, cgImage, _) in

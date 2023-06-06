@@ -31,8 +31,8 @@ class DivinationResultViewController: STBaseViewController {
         }
         
         view.popToRootView = { [weak self] in
+            self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
             self?.navigationController?.popToRootViewController(animated: true)
-            //self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
         }
         
         view.loginToFacebook = { [weak self] in
