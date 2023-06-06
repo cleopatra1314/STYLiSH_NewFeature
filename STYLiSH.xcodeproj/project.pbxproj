@@ -124,6 +124,13 @@
 		3CED80AF2301301300B7DA8E /* Trolley.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED80B12301301300B7DA8E /* Trolley.storyboard */; };
 		3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAC67222EEF71C00785FAB /* String+Extension.swift */; };
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
+		C8895D312A2ECCC200F9DD8D /* ChatBotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */; };
+		C8A764212A2E131D00A318DA /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A764202A2E131D00A318DA /* ChatBotViewController.swift */; };
+		C8B0567E2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */; };
+		C8B056802A2F65FF006D99EB /* PromotionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */; };
+		C8D1472B2A2F311F006093C6 /* UserChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */; };
+		C8D1472D2A2F41A9006093C6 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */; };
+		C8D1472F2A2F5096006093C6 /* DressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -259,6 +266,13 @@
 		3CFAC67222EEF71C00785FAB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STYLiSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
+		C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTableViewCell.swift; sourceTree = "<group>"; };
+		C8A764202A2E131D00A318DA /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
+		C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotBottomCollectionViewCell.swift; sourceTree = "<group>"; };
+		C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionTableViewCell.swift; sourceTree = "<group>"; };
+		C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChatTableViewCell.swift; sourceTree = "<group>"; };
+		C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
+		C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTableViewCell.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -536,6 +550,13 @@
 		3CD2911B221135E2008B8A2D /* STYLiSH */ = {
 			isa = PBXGroup;
 			children = (
+				C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */,
+				C8A764202A2E131D00A318DA /* ChatBotViewController.swift */,
+				C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */,
+				C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */,
+				C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */,
+				C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */,
+				C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */,
 				3CB8011F2229A0580029A552 /* Third Party Wrappers */,
 				3C09F51F22115A9F00C5B3E2 /* Extensions */,
 				3CD2913122113D12008B8A2D /* Resource */,
@@ -730,7 +751,6 @@
 				3CD29116221135E2008B8A2D /* Frameworks */,
 				3CD29117221135E2008B8A2D /* Resources */,
 				BD721BFB42BEC7C4CF30F644 /* [CP] Embed Pods Frameworks */,
-				3C6FABF322FD26EA00226316 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -826,24 +846,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C6FABF322FD26EA00226316 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 		BD721BFB42BEC7C4CF30F644 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -899,6 +901,7 @@
 				3C6FABF522FD39EB00226316 /* STOrderProductCellViewModel.swift in Sources */,
 				3CED4C0C22141E9700121D4B /* MarketProvider.swift in Sources */,
 				3C831C6022E9945500112298 /* STOrderProductCell.swift in Sources */,
+				C8B0567E2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift in Sources */,
 				3C1ACFE922152D29005583E2 /* ProfileCollectionViewCell.swift in Sources */,
 				3CB801232229A5290029A552 /* MJRefreshWrapper.swift in Sources */,
 				3C546BE522EABB6D0082C655 /* CheckoutViewController.swift in Sources */,
@@ -908,10 +911,13 @@
 				3C6020D8222B883600312958 /* ProductDescriptionTableViewCell.swift in Sources */,
 				3C0DD876221348E900F5237E /* LobbyViewController.swift in Sources */,
 				3C33691F2227DC7B008A5A7A /* TrolleySelectionView.swift in Sources */,
+				C8D1472D2A2F41A9006093C6 /* ChatBotModel.swift in Sources */,
 				3C831C6422E9AF8F00112298 /* STOrderUserInputCell.swift in Sources */,
 				3C4B10E222292EBB009942B7 /* STTapPayViewController.swift in Sources */,
+				C8A764212A2E131D00A318DA /* ChatBotViewController.swift in Sources */,
 				3C831C8A22EAAF7A00112298 /* STPaymentInfoTableViewCell.swift in Sources */,
 				3C990F6C22E5C78200F2FCEA /* ProductDetailView.swift in Sources */,
+				C8B056802A2F65FF006D99EB /* PromotionTableViewCell.swift in Sources */,
 				3C546BE722EAC79D0082C655 /* STOrderHeaderView.swift in Sources */,
 				3C5DD7CC2227EFFF0053B67A /* TrolleyViewController.swift in Sources */,
 				3C6020EA222BC00100312958 /* UILabel+Extension.swift in Sources */,
@@ -944,6 +950,7 @@
 				3C9EF5362213C97D00DEE152 /* MarketRequest.swift in Sources */,
 				3CB801252229AEE30029A552 /* UITableView+Extension.swift in Sources */,
 				3CDC5A6A222D860B0071D0D1 /* SizeSelectionCell.swift in Sources */,
+				C8895D312A2ECCC200F9DD8D /* ChatBotTableViewCell.swift in Sources */,
 				3C1ACFE622152B1F005583E2 /* UIScreen+Extension.swift in Sources */,
 				3C6020DD222B90DF00312958 /* ProductDetailCell.swift in Sources */,
 				3C09F51E22114E1900C5B3E2 /* UIStoryboard+Extension.swift in Sources */,
@@ -959,7 +966,9 @@
 				3CE7A51E22308D34009FF003 /* OrderObject.swift in Sources */,
 				3CD9BB35223B882C0012C00D /* AuthViewController.swift in Sources */,
 				58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */,
+				C8D1472B2A2F311F006093C6 /* UserChatTableViewCell.swift in Sources */,
 				3CB801212229A0970029A552 /* KingFisherWrapper.swift in Sources */,
+				C8D1472F2A2F5096006093C6 /* DressTableViewCell.swift in Sources */,
 				3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */,
 				3C33863F221BB2B800ED97E4 /* ProductListViewController.swift in Sources */,
 				3C6020E6222BB03400312958 /* STBaseViewController.swift in Sources */,
@@ -1176,7 +1185,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FRH9H66G29;
+				DEVELOPMENT_TEAM = 8MUTKC7BV7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
@@ -1188,7 +1197,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = cleopatra.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1202,7 +1211,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FRH9H66G29;
+				DEVELOPMENT_TEAM = 8MUTKC7BV7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
@@ -1214,7 +1223,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = cleopatra.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

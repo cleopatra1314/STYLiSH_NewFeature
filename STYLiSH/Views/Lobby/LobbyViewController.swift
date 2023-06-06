@@ -24,12 +24,17 @@ class LobbyViewController: STBaseViewController {
     }
 
     private let marketProvider = MarketProvider()
+    
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
+        self.navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
+        
+        //navigation controller 加入 chatBot icon
+        let chatBotButton = UIBarButtonItem(image: UIImage(named: "Icon_chatbot.png"), style: .plain, target: self, action: #selector(chatBotButtonTouchUpInside))
+        self.navigationItem.leftBarButtonItem = chatBotButton
         
         lobbyView.beginHeaderRefresh()
     }
@@ -45,6 +50,18 @@ class LobbyViewController: STBaseViewController {
             }
         })
     }
+    
+    @objc func chatBotButtonTouchUpInside(){
+        let chatBotVC = ChatBotViewController()
+//        present(chatBotVC, animated: true)
+//        chatBotVC.modalTransitionStyle = .partialCurl
+//        chatBotVC.modalPresentationStyle = .fullScreen
+//        navigationController?.pushViewController(chatBotVC, animated: true)
+        
+        let navigationControllerOfChatBot = UINavigationController(rootViewController: chatBotVC)
+        present(navigationControllerOfChatBot, animated: true)
+    }
+    
 }
 
 extension LobbyViewController: LobbyViewDelegate {
