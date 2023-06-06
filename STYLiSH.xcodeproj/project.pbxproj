@@ -126,6 +126,12 @@
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
 		C2358DA22A2DC77F00210AF7 /* CouponTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */; };
 		C2358DA42A2DC88C00210AF7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA32A2DC88C00210AF7 /* CouponCell.swift */; };
+		C2358DA82A2F1D3100210AF7 /* SelectedCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */; };
+		C27D343B2A2F36BD005CB0C8 /* GIF-Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D343A2A2F36BD005CB0C8 /* GIF-Swift.swift */; };
+		C27D343F2A2F403D005CB0C8 /* draw.gif in Resources */ = {isa = PBXBuildFile; fileRef = C27D343E2A2F403D005CB0C8 /* draw.gif */; };
+		C27D34412A2F405C005CB0C8 /* badCup.gif in Resources */ = {isa = PBXBuildFile; fileRef = C27D34402A2F405C005CB0C8 /* badCup.gif */; };
+		C27D34432A2F4063005CB0C8 /* goodCup.gif in Resources */ = {isa = PBXBuildFile; fileRef = C27D34422A2F4063005CB0C8 /* goodCup.gif */; };
+		C27D34452A2F41ED005CB0C8 /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D34442A2F41ED005CB0C8 /* CupView.swift */; };
 		C2A35B672A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */; };
 		C2A35B692A2B0D2700F5CA13 /* DivinationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */; };
 		C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */; };
@@ -133,7 +139,6 @@
 		C2CC8EDF2A29FB2D00DC8C8A /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */; };
 		C2CC8EE12A2A060A00DC8C8A /* PoemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */; };
 		C2CC8EE32A2A2CD200DC8C8A /* CouponTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */; };
-		C8A24C5C2A2C510E00D85B6A /* draw.gif in Resources */ = {isa = PBXBuildFile; fileRef = C8A24C5B2A2C510E00D85B6A /* draw.gif */; };
 		C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8AB46EE2A2A838E0043C379 /* Divination.storyboard */; };
 		C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */; };
 		C8BA70A92A2B2042003654E5 /* DivinationTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */; };
@@ -142,7 +147,6 @@
 		C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */; };
 		C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */; };
 		C8BCFCBD2A2CBF7400839E5C /* DivinationPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */; };
-		C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */; };
 		D306B883B370DFD3ED8ACD74 /* Pods_STYLiSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */; };
 /* End PBXBuildFile section */
 
@@ -280,6 +284,12 @@
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
 		C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewController.swift; sourceTree = "<group>"; };
 		C2358DA32A2DC88C00210AF7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
+		C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCouponView.swift; sourceTree = "<group>"; };
+		C27D343A2A2F36BD005CB0C8 /* GIF-Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GIF-Swift.swift"; sourceTree = "<group>"; };
+		C27D343E2A2F403D005CB0C8 /* draw.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = draw.gif; sourceTree = "<group>"; };
+		C27D34402A2F405C005CB0C8 /* badCup.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = badCup.gif; sourceTree = "<group>"; };
+		C27D34422A2F4063005CB0C8 /* goodCup.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = goodCup.gif; sourceTree = "<group>"; };
+		C27D34442A2F41ED005CB0C8 /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
 		C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductTableViewCell.swift; sourceTree = "<group>"; };
 		C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationProvider.swift; sourceTree = "<group>"; };
 		C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
@@ -287,7 +297,6 @@
 		C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoemTableViewCell.swift; sourceTree = "<group>"; };
 		C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewCell.swift; sourceTree = "<group>"; };
-		C8A24C5B2A2C510E00D85B6A /* draw.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = draw.gif; sourceTree = "<group>"; };
 		C8AB46EE2A2A838E0043C379 /* Divination.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Divination.storyboard; sourceTree = "<group>"; };
 		C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationViewController.swift; sourceTree = "<group>"; };
 		C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -296,7 +305,6 @@
 		C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
 		C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationPostModel.swift; sourceTree = "<group>"; };
-		C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivinationResultViewController.swift; sourceTree = "<group>"; };
 		E921004E251C9FC3CBC174F5 /* Pods-STYLiSH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.release.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.release.xcconfig"; sourceTree = "<group>"; };
 		F551E8F447D7C8DC42B53B98 /* Pods-STYLiSH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STYLiSH.debug.xcconfig"; path = "Target Support Files/Pods-STYLiSH/Pods-STYLiSH.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -505,6 +513,7 @@
 				3CB801202229A0970029A552 /* KingFisherWrapper.swift */,
 				3CB801222229A5290029A552 /* MJRefreshWrapper.swift */,
 				3CEBE07D222F979F0064EF82 /* JGProgressHUDWrapper.swift */,
+				C27D343A2A2F36BD005CB0C8 /* GIF-Swift.swift */,
 			);
 			path = "Third Party Wrappers";
 			sourceTree = "<group>";
@@ -557,16 +566,6 @@
 		3CD29110221135E2008B8A2D = {
 			isa = PBXGroup;
 			children = (
-				C8BCFCBE2A2D14C200839E5C /* DivinationResultViewController.swift */,
-				C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */,
-				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
-				C8A24C5B2A2C510E00D85B6A /* draw.gif */,
-				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
-				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
-				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
-				C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */,
-				C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */,
-				C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */,
 				3CD2911B221135E2008B8A2D /* STYLiSH */,
 				3CD2911A221135E2008B8A2D /* Products */,
 				F26A8A19BFED7C956C38BFE8 /* Frameworks */,
@@ -607,6 +606,7 @@
 				3CC706132216B32700CAD850 /* Product */,
 				3C1ACFE722152D10005583E2 /* Profile */,
 				3C0DD87B2213531400F5237E /* Lobby */,
+				C2358DA52A2DEE0400210AF7 /* Divination */,
 				3CD29125221135E3008B8A2D /* LaunchScreen.storyboard */,
 				3CED80922301204200B7DA8E /* Auth.storyboard */,
 				3C09F5112211435B00C5B3E2 /* Lobby.storyboard */,
@@ -614,12 +614,6 @@
 				3CD29120221135E2008B8A2D /* Main.storyboard */,
 				3CED80A82301256200B7DA8E /* Profile.storyboard */,
 				3CED80B12301301300B7DA8E /* Trolley.storyboard */,
-				C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */,
-				C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */,
-				C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */,
-				C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */,
-				C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */,
-				C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -646,6 +640,9 @@
 				3CED808E2301138800B7DA8E /* Localizable.strings */,
 				3CED8088230112C400B7DA8E /* InfoPlist.strings */,
 				3CD29123221135E3008B8A2D /* Assets.xcassets */,
+				C27D343E2A2F403D005CB0C8 /* draw.gif */,
+				C27D34402A2F405C005CB0C8 /* badCup.gif */,
+				C27D34422A2F4063005CB0C8 /* goodCup.gif */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -680,6 +677,7 @@
 				3C831C8922EAAF7A00112298 /* STPaymentInfoTableViewCell.xib */,
 				C2A35B6C2A2D7E4400F5CA13 /* CouponCheckoutCell.swift */,
 				C2358DA32A2DC88C00210AF7 /* CouponCell.swift */,
+				C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -766,6 +764,36 @@
 			path = APIProviders;
 			sourceTree = "<group>";
 		};
+		C2358DA52A2DEE0400210AF7 /* Divination */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB46F02A2A83A80043C379 /* DivinationViewController.swift */,
+				C2CC8EDE2A29FB2D00DC8C8A /* DivinationResultViewController.swift */,
+				C2358DA62A2DEE3600210AF7 /* TableViewCell */,
+				C8BCFCBC2A2CBF7400839E5C /* DivinationPostModel.swift */,
+				C2A35B682A2B0D2700F5CA13 /* DivinationProvider.swift */,
+				C8AB46EE2A2A838E0043C379 /* Divination.storyboard */,
+			);
+			path = Divination;
+			sourceTree = "<group>";
+		};
+		C2358DA62A2DEE3600210AF7 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C8BA70A82A2B2042003654E5 /* DivinationTitleTableViewCell.swift */,
+				C8BA70AA2A2B2981003654E5 /* GenderTableViewCell.swift */,
+				C8BA70AC2A2B29A0003654E5 /* BirthdayTableViewCell.swift */,
+				C8BA70AE2A2B29AF003654E5 /* ColorTableViewCell.swift */,
+				C8BA70B02A2B3D84003654E5 /* ButtonTableViewCell.swift */,
+				C2CC8EE02A2A060A00DC8C8A /* PoemTableViewCell.swift */,
+				C2CC8EE22A2A2CD200DC8C8A /* CouponTableViewCell.swift */,
+				C2A35B6A2A2B784A00F5CA13 /* CouponView.swift */,
+				C2A35B662A2AE69900F5CA13 /* RecommendedProductTableViewCell.swift */,
+				C27D34442A2F41ED005CB0C8 /* CupView.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		F26A8A19BFED7C956C38BFE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,10 +877,12 @@
 				3C6020DE222B90DF00312958 /* ProductDetailLabelCell.xib in Resources */,
 				3CC7061B2216B36800CAD850 /* ProductCollectionViewCell.xib in Resources */,
 				3C4B10D022292732009942B7 /* card_amex@3x.png in Resources */,
-				C8A24C5C2A2C510E00D85B6A /* draw.gif in Resources */,
+				C27D343F2A2F403D005CB0C8 /* draw.gif in Resources */,
 				3C831C8B22EAAF7A00112298 /* STPaymentInfoTableViewCell.xib in Resources */,
 				3C4B10D722292732009942B7 /* card_unknown.png in Resources */,
+				C27D34412A2F405C005CB0C8 /* badCup.gif in Resources */,
 				3C4B10D822292732009942B7 /* card_mastercard@3x.png in Resources */,
+				C27D34432A2F4063005CB0C8 /* goodCup.gif in Resources */,
 				3CD29124221135E3008B8A2D /* Assets.xcassets in Resources */,
 				3C4B10D222292732009942B7 /* card_unknown@3x.png in Resources */,
 				C8AB46EF2A2A838E0043C379 /* Divination.storyboard in Resources */,
@@ -937,7 +967,6 @@
 				3CE7A519223064C7009FF003 /* UserObject.swift in Sources */,
 				3CB801272229AFF10029A552 /* UICollectionView+Extension.swift in Sources */,
 				3C8F191B22E5BA9F00EECE90 /* LobbyView.swift in Sources */,
-				C8BCFCBF2A2D14C200839E5C /* DivinationResultViewController.swift in Sources */,
 				3C6FABF522FD39EB00226316 /* STOrderProductCellViewModel.swift in Sources */,
 				3CED4C0C22141E9700121D4B /* MarketProvider.swift in Sources */,
 				3C831C6022E9945500112298 /* STOrderProductCell.swift in Sources */,
@@ -963,6 +992,7 @@
 				3C1ACFE422151F50005583E2 /* ProfileViewController.swift in Sources */,
 				3C34794C222E82F600969C30 /* AmountSelectionCell.swift in Sources */,
 				3C75FD0F22F1767D0068FEA5 /* CheckoutResultViewController.swift in Sources */,
+				C27D343B2A2F36BD005CB0C8 /* GIF-Swift.swift in Sources */,
 				3CE7A51C223089C3009FF003 /* OrderProvider.swift in Sources */,
 				3C0DD87A221350B300F5237E /* UIColor+Extension.swift in Sources */,
 				C2A35B6B2A2B784A00F5CA13 /* CouponView.swift in Sources */,
@@ -988,6 +1018,7 @@
 				3CA25519222A484300B286F6 /* ProductsListProvider.swift in Sources */,
 				3C3369162227CE7D008A5A7A /* TrolleyProductBaseView.swift in Sources */,
 				C2CC8EE32A2A2CD200DC8C8A /* CouponTableViewCell.swift in Sources */,
+				C27D34452A2F41ED005CB0C8 /* CupView.swift in Sources */,
 				C8AB46F12A2A83A80043C379 /* DivinationViewController.swift in Sources */,
 				3CE7A50222302354009FF003 /* ProductContentCategory.swift in Sources */,
 				3C6020E8222BBA3C00312958 /* ProductBasicCell.swift in Sources */,
@@ -1019,6 +1050,7 @@
 				3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */,
 				3C33863F221BB2B800ED97E4 /* ProductListViewController.swift in Sources */,
 				3C6020E6222BB03400312958 /* STBaseViewController.swift in Sources */,
+				C2358DA82A2F1D3100210AF7 /* SelectedCouponView.swift in Sources */,
 				C8BA70AF2A2B29AF003654E5 /* ColorTableViewCell.swift in Sources */,
 				3CEBE07E222F979F0064EF82 /* JGProgressHUDWrapper.swift in Sources */,
 				3CCB3BC6222AAC8300976A1C /* LKGalleryView.swift in Sources */,
@@ -1233,19 +1265,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MUTKC7BV7;
+				DEVELOPMENT_TEAM = 4PYBJ5C35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay/TPDirectResource",
 				);
 				INFOPLIST_FILE = STYLiSH/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = AndyLin.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1259,19 +1291,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MUTKC7BV7;
+				DEVELOPMENT_TEAM = 4PYBJ5C35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay/TPDirectResource",
 				);
 				INFOPLIST_FILE = STYLiSH/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = AndyLin.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

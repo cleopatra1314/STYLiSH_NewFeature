@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class DivinationViewController: UIViewController, UITextFieldDelegate{
     
     let divinationTableView: UITableView = {
@@ -23,11 +22,10 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
     //Info selected by user
     var selectedColorHex: String?
     var selectedDateString: String?
-    var selectedGender: String?
+    var selectedGender: String = Gender.男性.getGender()
     var selectedConstellation: String?
     let genderArray: [Gender] = [.男性, .女性, .不分]
     let arrayOfColor = ["#DDF0FF", "#DDFFBB", "#CCCCCC", "#334455", "#BB7744"]
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +42,13 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         //隱藏 navigation bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = .white
-//        navigationController?.navigationBar.barTintColor = .white
         
         setTableView()
-        
     }
-    
     
     override func viewDidLayoutSubviews() {
         divinationTableView.separatorStyle = .none
     }
-    
     
     func setTableView(){
         
@@ -68,7 +62,6 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         ])
         
     }
-   
     
     @objc func postDivinationData(){
         
@@ -77,49 +70,27 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         selectedDateString = dateCell.selectedDateString
         selectedConstellation = dateCell.selectedConstellation
         
+        guard let selectedDateString = selectedDateString,
+              let selectedConstellation = selectedConstellation else { print("birthday is nil") ; return }
+        
         //取得 cell 輸入的顏色資訊
         let colorCell = divinationTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! ColorTableViewCell
-        selectedColorHex = arrayOfColor[colorCell.indexOfSelectedColor!]
+        guard let indexOfSelectedColor = colorCell.indexOfSelectedColor else { print("color is nil") ; return }
+        let selectedColorHex = arrayOfColor[indexOfSelectedColor]
         
+        let userImportData = STSuccessParser(data: DivinationRequestBody(birthday: selectedDateString,
+                                                                         sign: selectedConstellation,
+                                                                         gender: selectedGender,
+                                                                         color: selectedColorHex), paging: nil)
         
-        var request = URLRequest(url: URL(string: "https://hyperushle.com/api/ios/divination")!,timeoutInterval: Double.infinity)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let encoder = JSONEncoder()
-        let userImportData = STSuccessParser(data:DivinationUserRequestBody(birthday: selectedDateString!, sign: selectedConstellation!, gender: selectedGender!, color: selectedColorHex!), paging: nil)
-        print("使用者輸入的資料為 \(userImportData)")
-        let data = try? encoder.encode(userImportData)
-
-        
-        request.httpMethod = "POST"
-        request.httpBody = data
-        
-        // Set httpBody
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data {
-                
-                let content = String(data: data, encoding: .utf8) ?? ""
-                
-                    do {
-                        let decoder = JSONDecoder()
-                        let divinationResponse = try decoder.decode(STSuccessParser<DivinationUserPostResponse>.self, from: data)
-                     
-                    } catch  {
-                        print(error)
-                    }
-                }
+        DivinationProvider.shared.fetchDivinationResult(requestBody: userImportData) { [weak self] data in
+            DispatchQueue.main.async {
+                let DivinationResultVC = DivinationResultViewController()
+                DivinationResultVC.data = data
+                self?.navigationController?.pushViewController(DivinationResultVC, animated: true)
+            }
         }
-        task.resume()
-
-        
-        //Click 占卜 button 後跳轉下一個畫面
-//        let DivinationResultVC = DivinationResultViewController()
-//        DivinationResultVC.view.backgroundColor = .white
-//        navigationController?.pushViewController(DivinationResultVC, animated: true)
     }
-    
-    
-    
 }
 
 
@@ -137,21 +108,9 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
             guard let titleCell = cell as? DivinationTitleTableViewCell else { return cell }
-                
+            
             titleCell.pageTitleLabel.text = "優惠占卜"
-            titleCell.divinationImageView.image = UIImage(named: "draw.png")
-//            titleCell.divinationImageView.contentMode = .scaleAspectFit
             titleCell.layoutCell()
-            
-            // 加入 gif 圖
-//            if let url = Bundle.main.url(forResource: "draw", withExtension: "gif"){
-//                let cfUrl = url as CFURL
-//                CGAnimateImageAtURLWithBlock(cfUrl, nil) { (_, cgImage, _) in
-//                    titleCell.divinationImageView.image = UIImage(cgImage: cgImage)
-//                    return
-//                }
-//            }
-            
             titleCell.selectionStyle = .none
             
             return titleCell
@@ -164,8 +123,8 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             genderCell.layoutCell()
             genderCell.genderPicker.delegate = self
             genderCell.genderPicker.dataSource = self
-            print(genderCell.genderPicker)
             genderCell.selectionStyle = .none
+            
             return genderCell
             
         case 2:
@@ -176,7 +135,6 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             birthdayCell.constellationLabel.text = "星座"
             birthdayCell.layoutCell()
             birthdayCell.birthdayTextField.delegate = self
-//            selectedDateString = birthdayCell.selectedDateString
             birthdayCell.selectionStyle = .none
             
             return birthdayCell
@@ -188,7 +146,6 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             colorCell.colorLabel.text = "偏好顏色"
             colorCell.layoutColorBall(arrayOfColor: arrayOfColor)
             colorCell.layoutCell()
-//            selectedColorHex = colorCell.selectedColorHex
             colorCell.selectionStyle = .none
             
             return colorCell
@@ -204,9 +161,7 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             
             return buttonCell
             
-        default:
-            //??
-            return tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
+        default: return tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
         }
         
         
@@ -269,5 +224,4 @@ extension DivinationViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedGender = genderArray[row].getGender()
     }
-    
 }

@@ -13,13 +13,7 @@ class DivinationResultViewController: STBaseViewController {
     private let cellTypes: [DivinationCellType] = [.poem, .coupon, .prodcut]
     private let userProvider = UserProvider()
     
-    var data: DivinationData? {
-        didSet {
-            DispatchQueue.main.async { [unowned self] in
-                tableView.reloadData()
-            }
-        }
-    }
+    var data: DivinationData?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -27,20 +21,22 @@ class DivinationResultViewController: STBaseViewController {
         return tableView
     }()
     
+    private let cupView: CupView = CupView()
+    
     private lazy var couponView: CouponView = {
         let view = CouponView()
         view.isHidden = true
-        if KeyChainManager.shared.token == nil {
-            view.toggle(isSignedIn: false)
-        } else {
-            view.toggle(isSignedIn: true)
-        }
+        if KeyChainManager.shared.token == nil { view.toggle(isSignedIn: false) } else { view.toggle(isSignedIn: true) }
+        
         view.dismissView = {
             view.isHidden = true
         }
+        
         view.popToRootView = { [weak self] in
+            self?.tabBarController?.selectedViewController = self?.tabBarController?.viewControllers![0]
             self?.navigationController?.popToRootViewController(animated: true)
         }
+        
         view.loginToFacebook = { [weak self] in
             guard let self = self else { return }
             userProvider.loginWithFaceBook(from: self, completion: { [weak self] result in
@@ -71,6 +67,7 @@ class DivinationResultViewController: STBaseViewController {
         // Add the table view to the view controller's view
         view.addSubview(tableView)
         view.addSubview(couponView)
+        animateCupView()
         
         // Set up the table view constraints
         NSLayoutConstraint.activate([
@@ -94,11 +91,29 @@ class DivinationResultViewController: STBaseViewController {
                            forCellReuseIdentifier: CouponTableViewCell.reuseIdentifier)
         tableView.register(RecommendedProductTableViewCell.self,
                            forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
-        
-        DivinationProvider.shared.fetchDivinationResult { [weak self] data in
-            guard let self = self else { return }
-            self.data = data
-            print(data)
+    }
+    
+    @objc private func animateCupView() {
+        view.addSubview(cupView)
+        guard let data = data else { return }
+        tableView.isUserInteractionEnabled = false
+        cupView.configure(title: data.strawsStory.type, subtitle: data.strawsStory.story)
+        NSLayoutConstraint.activate([
+            cupView.topAnchor.constraint(equalTo: view.topAnchor),
+            cupView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cupView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cupView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+        let animator = UIViewPropertyAnimator(duration: 2, curve: .easeIn) { [weak self] in
+            self?.cupView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self?.cupView.alpha = 0.0
+        }
+        animator.startAnimation(afterDelay: 2)
+        animator.addCompletion { [weak self] _ in
+            self?.cupView.transform = .identity
+            self?.cupView.alpha = 1.0
+            self?.cupView.removeFromSuperview()
+            self?.tableView.isUserInteractionEnabled = true
         }
     }
     
@@ -111,10 +126,8 @@ class DivinationResultViewController: STBaseViewController {
             switch result {
             case .success:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入成功")
-                DispatchQueue.main.async {
-                    self?.couponView.toggle(isSignedIn: true)
-                    self?.couponView.isHidden = false
-                }
+                // Log in success
+                self?.sendCouponPost()
             case .failure:
                 LKProgressHUD.showSuccess(text: "STYLiSH 登入失敗!")
             }
@@ -122,6 +135,24 @@ class DivinationResultViewController: STBaseViewController {
                 self?.presentingViewController?.dismiss(animated: false, completion: nil)
             }
         })
+    }
+    
+    private func sendCouponPost() {
+        guard let couponId = data?.couponId else { return }
+        DivinationProvider.shared.sendCouponId(couponId: couponId) { [weak self] statusCode, data in
+            if statusCode == 403 {
+                DispatchQueue.main.async {
+                    self?.couponView.toggle(isSignedIn: true)
+                    self?.couponView.changeTitleLabel(with: data)
+                    self?.couponView.isHidden = false
+                }
+            } else if statusCode == 200 {
+                DispatchQueue.main.async {
+                    self?.couponView.toggle(isSignedIn: true)
+                    self?.couponView.isHidden = false
+                }
+            }
+        }
     }
 }
 
@@ -163,6 +194,7 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             guard let cell = cell as? PoemTableViewCell else { return cell }
             cell.configure(with: "抽中\(data.strawsStory.type)！",
                            subtitle: data.strawsStory.story)
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateCupView)))
             return cell
         case .coupon:
             guard let cell = cell as? CouponTableViewCell else { return cell }
@@ -173,7 +205,8 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
                 self?.navigationController?.popViewController(animated: true)
             }
             cell.showPopUpView = { [weak self] in
-                self?.couponView.isHidden = false
+                if KeyChainManager.shared.token == nil { self?.couponView.isHidden = false }
+                self?.sendCouponPost()
             }
             return cell
         case .prodcut:

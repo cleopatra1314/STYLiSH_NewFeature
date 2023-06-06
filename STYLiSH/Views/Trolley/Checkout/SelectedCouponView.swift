@@ -1,26 +1,15 @@
 //
-//  CouponCell.swift
+//  SelectedCouponView.swift
 //  STYLiSH
 //
-//  Created by Lin Hsin-An on 2023/6/5.
+//  Created by Lin Hsin-An on 2023/6/6.
 //  Copyright © 2023 AppWorks School. All rights reserved.
 //
 
 import UIKit
 
-class CouponCell: UITableViewCell {
-    static let reuseIdentifier = String(describing: CouponCell.self)
-    
-    var updateCells: (() -> ())?
-    
-    private let couponImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "free_shipping")
-        return imageView
-    }()
-    
+class SelectedCouponView: UIView {
+
     private let labelsContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +20,14 @@ class CouponCell: UITableViewCell {
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 2
         return view
+    }()
+    
+    private let couponImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "free_shipping")
+        return imageView
     }()
     
     private let couponName: UILabel = {
@@ -54,38 +51,31 @@ class CouponCell: UITableViewCell {
         return label
     }()
     
-    private let checkbox: UIButton = {
-        let button = UIButton(configuration: .plain())
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .lightGray
-        button.changesSelectionAsPrimaryAction = true
-        button.configurationUpdateHandler = { button in
-            var config = button.configuration
-            config?.background.image = UIImage(systemName: button.isSelected ? "checkmark.square" : "square")
-            config?.background.imageContentMode = .scaleAspectFill
-            config?.background.backgroundColor = .white
-            button.configuration = config
-        }
-        return button
+    private let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "尚未選擇折價卷"
+        label.font = .regular(size: 16)
+        label.textColor = .lightGray
+        return label
     }()
     
-    @objc func checkboxTapped(_ button: UIButton) {
-        updateCells?()
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        [labelsContainerView, checkbox].forEach { contentView.addSubview($0) }
-        [couponName, couponDiscount, couponExpirationDate, couponImageView].forEach {
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .white
+        
+        [labelsContainerView].forEach { addSubview($0) }
+        [couponName, couponDiscount, couponExpirationDate, couponImageView, label].forEach {
             labelsContainerView.addSubview($0)
         }
         
-        checkbox.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
+        configure(hasCoupon: false)
         
         NSLayoutConstraint.activate([
-            labelsContainerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -32),
-            labelsContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            labelsContainerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            labelsContainerView.centerYAnchor.constraint(equalTo: centerYAnchor),
             labelsContainerView.widthAnchor.constraint(equalToConstant: 280),
             labelsContainerView.heightAnchor.constraint(equalToConstant: 150),
             
@@ -103,10 +93,8 @@ class CouponCell: UITableViewCell {
             couponExpirationDate.leadingAnchor.constraint(equalTo: couponName.leadingAnchor),
             couponExpirationDate.bottomAnchor.constraint(equalTo: couponImageView.bottomAnchor, constant: 4),
             
-            checkbox.leadingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor, constant: 32),
-            checkbox.centerYAnchor.constraint(equalTo: labelsContainerView.centerYAnchor),
-            checkbox.widthAnchor.constraint(equalToConstant: 30),
-            checkbox.heightAnchor.constraint(equalTo: checkbox.widthAnchor, multiplier: 1)
+            label.centerXAnchor.constraint(equalTo: labelsContainerView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: labelsContainerView.centerYAnchor),
         ])
     }
     
@@ -114,13 +102,13 @@ class CouponCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with type: String,
+    func configure(with title: String,
                    couponDiscountText: Int,
                    couponExpirationDateText: String?) {
         let validDate = couponExpirationDateText != nil ? couponExpirationDateText?.split(separator: "T")[0] : "永遠有效"
         
         var couponNameText: String {
-            switch type {
+            switch title {
             case "deal items": return "特定品項"
             case "fixed_amout": return "現金"
             case "free_shipping": return "運費"
@@ -130,14 +118,22 @@ class CouponCell: UITableViewCell {
         couponName.text = "\(couponNameText)折價卷"
         couponDiscount.text = "折$\(couponDiscountText)"
         couponExpirationDate.text = "有效期限 \(validDate!)"
-        couponImageView.image = UIImage(named: type)
+        couponImageView.image = UIImage(named: title)
     }
     
-    func selectCheckbox() {
-        checkbox.isSelected = true
-    }
-    
-    func deselectCheckbox() {
-        checkbox.isSelected = false
+    func configure(hasCoupon: Bool) {
+        if hasCoupon {
+            couponName.isHidden = false
+            couponDiscount.isHidden = false
+            couponExpirationDate.isHidden = false
+            couponImageView.isHidden = false
+            label.isHidden = true
+        } else {
+            couponName.isHidden = true
+            couponDiscount.isHidden = true
+            couponExpirationDate.isHidden = true
+            couponImageView.isHidden = true
+            label.isHidden = false
+        }
     }
 }

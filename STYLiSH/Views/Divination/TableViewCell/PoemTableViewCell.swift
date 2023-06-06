@@ -27,6 +27,7 @@ class PoemTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .medium(size: 20)
+        label.textColor = .B1
         return label
     }()
     
@@ -34,6 +35,7 @@ class PoemTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .regular(size: 18)
+        label.textColor = .B1
         label.numberOfLines = 0
         return label
     }()

@@ -126,4 +126,8 @@ class CouponView: UIView {
             leaveButton.isHidden = true
         }
     }
+    
+    func changeTitleLabel(with title: String) {
+        titleLabel.text = title
+    }
 }

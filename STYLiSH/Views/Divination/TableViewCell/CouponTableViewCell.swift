@@ -96,12 +96,10 @@ class CouponTableViewCell: UITableViewCell {
     var popViewController: (() -> Void)?
     
     @objc func redrawCoupon() {
-        print("redraw tapped")
         popViewController?()
     }
     
     @objc func receiveCoupon() {
-        print("receive tapped")
         showPopUpView?()
     }
     
@@ -156,8 +154,8 @@ class CouponTableViewCell: UITableViewCell {
     
     func configure(with title: String,
                    couponDiscountText: Int,
-                   couponExpirationDateText: String) {
-        let validDate = couponExpirationDateText.split(separator: "T")[0]
+                   couponExpirationDateText: String?) {
+        let validDate = couponExpirationDateText != nil ? couponExpirationDateText?.split(separator: "T")[0] : "永遠有效"
         
         var couponNameText: String {
             switch title {
@@ -170,7 +168,7 @@ class CouponTableViewCell: UITableViewCell {
         titleLabel.text = "恭喜您獲得\(couponNameText)折價卷乙張"
         couponName.text = "\(couponNameText)折價卷"
         couponDiscount.text = "折$\(couponDiscountText)"
-        couponExpirationDate.text = "有效期限 \(validDate)"
+        couponExpirationDate.text = "有效期限 \(validDate!)"
         couponImageView.image = UIImage(named: title)
     }
 
