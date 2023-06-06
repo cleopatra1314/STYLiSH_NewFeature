@@ -23,11 +23,10 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
     //Info selected by user
     var selectedColorHex: String?
     var selectedDateString: String?
-    var selectedGender: String?
+    var selectedGender: String = Gender.男性.getGender()
     var selectedConstellation: String?
     let genderArray: [Gender] = [.男性, .女性, .不分]
     let arrayOfColor = ["#DDF0FF", "#DDFFBB", "#CCCCCC", "#334455", "#BB7744"]
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,15 +71,20 @@ class DivinationViewController: UIViewController, UITextFieldDelegate{
         selectedDateString = dateCell.selectedDateString
         selectedConstellation = dateCell.selectedConstellation
         
+        guard let selectedDateString = selectedDateString,
+              let selectedConstellation = selectedConstellation else { print("birthday is nil") ; return }
+        
         //取得 cell 輸入的顏色資訊
         let colorCell = divinationTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! ColorTableViewCell
-        selectedColorHex = arrayOfColor[colorCell.indexOfSelectedColor!]
+        guard let indexOfSelectedColor = colorCell.indexOfSelectedColor else { print("color is nil") ; return }
+        let selectedColorHex = arrayOfColor[indexOfSelectedColor]
         
-        let userData = STSuccessParser(data: DivinationRequestBody(birthday: "YYYY-MM-DD",
-                                                                   sign: "String",
-                                                                   gender: "men",
-                                                                   color: "#CCCCCC"), paging: nil)
-        DivinationProvider.shared.fetchDivinationResult(requestBody: userData) { [weak self] data in
+        let userImportData = STSuccessParser(data: DivinationRequestBody(birthday: selectedDateString,
+                                                                         sign: selectedConstellation,
+                                                                         gender: selectedGender,
+                                                                         color: selectedColorHex), paging: nil)
+        
+        DivinationProvider.shared.fetchDivinationResult(requestBody: userImportData) { [weak self] data in
             DispatchQueue.main.async {
                 let DivinationResultVC = DivinationResultViewController()
                 DivinationResultVC.data = data
