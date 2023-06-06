@@ -108,22 +108,9 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
             guard let titleCell = cell as? DivinationTitleTableViewCell else { return cell }
-                
+            
             titleCell.pageTitleLabel.text = "優惠占卜"
-//            titleCell.divinationImageView.image = UIImage(named: "draw.png")
-//            titleCell.divinationImageView.contentMode = .scaleAspectFit
             titleCell.layoutCell()
-            
-            //加入 gif 圖
-            
-//            if let url = Bundle.main.url(forResource: "draw", withExtension: "gif"){
-//                let cfUrl = url as CFURL
-//                CGAnimateImageAtURLWithBlock(cfUrl, nil) { (_, cgImage, _) in
-//                    titleCell.divinationImageView.image = UIImage(cgImage: cgImage)
-//                    return
-//                }
-//            }
-            
             titleCell.selectionStyle = .none
             
             return titleCell
@@ -138,6 +125,7 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             genderCell.genderPicker.dataSource = self
             print(genderCell.genderPicker)
             genderCell.selectionStyle = .none
+            
             return genderCell
             
         case 2:
@@ -148,7 +136,6 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             birthdayCell.constellationLabel.text = "星座"
             birthdayCell.layoutCell()
             birthdayCell.birthdayTextField.delegate = self
-//            selectedDateString = birthdayCell.selectedDateString
             birthdayCell.selectionStyle = .none
             
             return birthdayCell
@@ -160,7 +147,6 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             colorCell.colorLabel.text = "偏好顏色"
             colorCell.layoutColorBall(arrayOfColor: arrayOfColor)
             colorCell.layoutCell()
-//            selectedColorHex = colorCell.selectedColorHex
             colorCell.selectionStyle = .none
             
             return colorCell
@@ -176,9 +162,7 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             
             return buttonCell
             
-        default:
-            //??
-            return tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
+        default: return tableView.dequeueReusableCell(withIdentifier: "\(DivinationTitleTableViewCell.self)", for: indexPath)
         }
         
         

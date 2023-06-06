@@ -33,6 +33,15 @@ class DivinationTitleTableViewCell: UITableViewCell {
         self.contentView.addSubview(pageTitleLabel)
         self.contentView.addSubview(divinationImageView)
         
+        //加入 gif 圖
+//        if let url = Bundle.main.url(forResource: "draw", withExtension: "gif"){
+//            let cfUrl = url as CFURL
+//            CGAnimateImageAtURLWithBlock(cfUrl, nil) { (_, cgImage, _) in
+//                titleCell.divinationImageView.image = UIImage(cgImage: cgImage)
+//                return
+//            }
+//        }
+        
         NSLayoutConstraint.activate([
             pageTitleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             pageTitleLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
