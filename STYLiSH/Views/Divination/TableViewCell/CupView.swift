@@ -26,6 +26,7 @@ class CupView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .medium(size: 20)
+        label.textColor = .B1
         return label
     }()
     
@@ -33,6 +34,7 @@ class CupView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .regular(size: 18)
+        label.textColor = .B1
         label.numberOfLines = 0
         return label
     }()
@@ -63,7 +65,8 @@ class CupView: UIView {
         
         NSLayoutConstraint.activate([
             labelsContainerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            labelsContainerView.bottomAnchor.constraint(equalTo: cupImageView.topAnchor, constant: -32),
+            labelsContainerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15),
+            //labelsContainerView.bottomAnchor.constraint(equalTo: cupImageView.topAnchor, constant: -32),
             labelsContainerView.widthAnchor.constraint(equalToConstant: 250),
             labelsContainerView.heightAnchor.constraint(equalToConstant: 170),
             
@@ -87,7 +90,12 @@ class CupView: UIView {
     }
     
     func configure(title: String, subtitle: String) {
-        titleLabel.text = title
+        titleLabel.text = "抽中\(title)！"
         subtitleLabel.text = subtitle
+        if ["大吉籤", "上上籤", "上中籤"].contains(title) {
+            cupImageView.image = UIImage.gifImageWithName("goodCup")
+        } else {
+            cupImageView.image = UIImage.gifImageWithName("badCup")
+        }
     }
 }

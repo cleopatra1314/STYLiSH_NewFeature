@@ -93,25 +93,27 @@ class DivinationResultViewController: STBaseViewController {
                            forCellReuseIdentifier: RecommendedProductTableViewCell.reuseIdentifier)
     }
     
-    private func animateCupView() {
+    @objc private func animateCupView() {
         view.addSubview(cupView)
         guard let data = data else { return }
-        cupView.configure(title: "抽中\(data.strawsStory.type)", subtitle: data.strawsStory.story)
+        tableView.isUserInteractionEnabled = false
+        cupView.configure(title: data.strawsStory.type, subtitle: data.strawsStory.story)
         NSLayoutConstraint.activate([
-            cupView.topAnchor.constraint(equalTo: view.topAnchor, constant: -50),
-            cupView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -50),
-            cupView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 50),
-            cupView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50),
+            cupView.topAnchor.constraint(equalTo: view.topAnchor),
+            cupView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cupView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cupView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-        let animator = UIViewPropertyAnimator(duration: 3, curve: .easeIn) {
-            self.cupView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            self.cupView.alpha = 0.0
+        let animator = UIViewPropertyAnimator(duration: 2, curve: .easeIn) { [weak self] in
+            self?.cupView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self?.cupView.alpha = 0.0
         }
         animator.startAnimation(afterDelay: 2)
-        animator.addCompletion { _ in
-            self.cupView.transform = .identity
-            self.cupView.alpha = 1.0
-            self.cupView.removeFromSuperview()
+        animator.addCompletion { [weak self] _ in
+            self?.cupView.transform = .identity
+            self?.cupView.alpha = 1.0
+            self?.cupView.removeFromSuperview()
+            self?.tableView.isUserInteractionEnabled = true
         }
     }
     
@@ -192,6 +194,7 @@ extension DivinationResultViewController: UITableViewDataSource, UITableViewDele
             guard let cell = cell as? PoemTableViewCell else { return cell }
             cell.configure(with: "抽中\(data.strawsStory.type)！",
                            subtitle: data.strawsStory.story)
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateCupView)))
             return cell
         case .coupon:
             guard let cell = cell as? CouponTableViewCell else { return cell }

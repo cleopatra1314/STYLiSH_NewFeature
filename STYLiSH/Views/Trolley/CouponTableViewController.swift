@@ -21,8 +21,7 @@ class CouponTableViewController: STBaseViewController {
     var selectedCouponIndexPath: IndexPath? {
         didSet {
             guard let data = data,
-                  let selectedCouponIndexPath = selectedCouponIndexPath,
-                  data.count > selectedCouponIndexPath.row else { return }
+                  let selectedCouponIndexPath = selectedCouponIndexPath else { return }
             selectedCoupon = data[selectedCouponIndexPath.row]
         }
     }
@@ -89,6 +88,7 @@ extension CouponTableViewController: UITableViewDataSource, UITableViewDelegate 
                     if self?.selectedCouponIndexPath == indexPath {
                         aCell.deselectCheckbox()
                         self?.selectedCouponIndexPath = nil
+                        self?.selectedCoupon = nil
                     } else {
                         aCell.selectCheckbox()
                         self?.selectedCouponIndexPath = indexPath

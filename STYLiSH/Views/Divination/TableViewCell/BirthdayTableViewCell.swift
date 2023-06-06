@@ -99,7 +99,6 @@ class BirthdayTableViewCell: UITableViewCell{
             
             let selectedFormattedDate = selectedFormatter.string(from: selectedDate)
             selectedDateString = selectedFormattedDate
-            print("輸入日期為 \(selectedDateString)")
 
             let monthComponentOfDate = selectedDate.get(.month)
             let dayComponentOfDate = selectedDate.get(.day)

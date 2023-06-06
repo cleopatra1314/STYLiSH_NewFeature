@@ -123,7 +123,6 @@ extension DivinationViewController: UITableViewDelegate, UITableViewDataSource{
             genderCell.layoutCell()
             genderCell.genderPicker.delegate = self
             genderCell.genderPicker.dataSource = self
-            print(genderCell.genderPicker)
             genderCell.selectionStyle = .none
             
             return genderCell

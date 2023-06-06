@@ -205,7 +205,7 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
             let couponTableVC = CouponTableViewController()
-            couponTableVC.selectedCouponIndexPath = couponIndexPath
+            // Receive coupon from couponTable
             couponTableVC.passCoupon = { [weak self] indexPath, coupon in
                 self?.coupon = coupon
                 self?.couponIndexPath = indexPath
@@ -234,6 +234,12 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
                     self?.orderProvider.order.productPriceDiscount = aCoupon.discount
                 }
                 tableView.reloadData()
+            }
+            // Pass coupon to couponTable
+            if let coupon = coupon,
+               let couponIndexPath = couponIndexPath {
+                couponTableVC.selectedCouponIndexPath = couponIndexPath
+                couponTableVC.selectedCoupon = coupon
             }
             navigationController?.pushViewController(couponTableVC, animated: true)
         }
