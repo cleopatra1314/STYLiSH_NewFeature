@@ -20,7 +20,10 @@ class CouponTableViewController: STBaseViewController {
     
     var selectedCouponIndexPath: IndexPath? {
         didSet {
-            selectedCoupon = data?[selectedCouponIndexPath!.row]
+            guard let data = data,
+                  let selectedCouponIndexPath = selectedCouponIndexPath,
+                  data.count > selectedCouponIndexPath.row else { return }
+            selectedCoupon = data[selectedCouponIndexPath.row]
         }
     }
     var selectedCoupon: Coupons.Coupon?

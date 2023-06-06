@@ -84,7 +84,7 @@ class CouponCell: UITableViewCell {
         checkbox.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            labelsContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            labelsContainerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -32),
             labelsContainerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             labelsContainerView.widthAnchor.constraint(equalToConstant: 280),
             labelsContainerView.heightAnchor.constraint(equalToConstant: 150),
@@ -103,7 +103,7 @@ class CouponCell: UITableViewCell {
             couponExpirationDate.leadingAnchor.constraint(equalTo: couponName.leadingAnchor),
             couponExpirationDate.bottomAnchor.constraint(equalTo: couponImageView.bottomAnchor, constant: 4),
             
-            checkbox.leadingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor, constant: 24),
+            checkbox.leadingAnchor.constraint(equalTo: labelsContainerView.trailingAnchor, constant: 32),
             checkbox.centerYAnchor.constraint(equalTo: labelsContainerView.centerYAnchor),
             checkbox.widthAnchor.constraint(equalToConstant: 30),
             checkbox.heightAnchor.constraint(equalTo: checkbox.widthAnchor, multiplier: 1)

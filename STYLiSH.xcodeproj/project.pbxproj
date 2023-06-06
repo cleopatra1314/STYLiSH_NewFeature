@@ -1245,7 +1245,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MUTKC7BV7;
+				DEVELOPMENT_TEAM = 4PYBJ5C35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
@@ -1257,7 +1257,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = AndyLin.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1271,7 +1271,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MUTKC7BV7;
+				DEVELOPMENT_TEAM = 4PYBJ5C35H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/STYLiSH/Resource/TapPay",
@@ -1283,7 +1283,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = AppWorksSchool.STYLiSH;
+				PRODUCT_BUNDLE_IDENTIFIER = AndyLin.STYLiSH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "STYLiSH/Resource/STYLiSH-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
