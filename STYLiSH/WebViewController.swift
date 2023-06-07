@@ -13,7 +13,7 @@ class WebViewController: STBaseViewController {
     
     var webView: WKWebView!
     
-    let socket = WebSokcet.shared
+    let socket = WebSocket.shared
     
     override func loadView() {
         webView = WKWebView()
@@ -30,7 +30,7 @@ class WebViewController: STBaseViewController {
         
         if #available(iOS 14.0, *) {
             let dismiss = UIAction { [weak self] _ in
-                self?.socket.socketEmit()
+                self?.socket.socketEmit(with: "Test from iPhone!")
                 //self?.dismiss(animated: true)
             }
             navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .close, primaryAction: dismiss)

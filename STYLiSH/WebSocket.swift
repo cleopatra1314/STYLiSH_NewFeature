@@ -9,17 +9,22 @@
 import UIKit
 import SocketIO
 
-class WebSokcet {
-    static let shared = WebSokcet()
+struct Message: Codable, SocketData {
+    let from: String
+    let to: String
+    let message: String
+}
+
+protocol WebSocketDelegate: AnyObject {
+    func pass(adminMessages: [Message])
+}
+
+class WebSocket {
+    static let shared = WebSocket()
     
-    struct Message: Codable, SocketData {
-        let from: String
-        let to: String
-        let message: String
-    }
-    
-    let manager = SocketManager(socketURL: URL(string: "https://emmalinstudio.com/")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "https://emmalinstudio.com/")!, config: [.log(true), .compress ])
     var socket: SocketIOClient!
+    weak var delegate: WebSocketDelegate?
     
     private init() {
         socket = manager.defaultSocket
@@ -37,19 +42,18 @@ class WebSokcet {
             do {
                 let data = try JSONSerialization.data(withJSONObject: array, options: [])
                 let objects = try decoder.decode([STSuccessParser<Message>].self, from: data)
-                let filteredMessages = objects.map { $0.data }
-                                              .filter { [weak self] in
-                                                  guard let self = self else { return false }
-                                                  if $0.from == self.socket.sid && $0.to == "admin" {
-                                                        return true
-                                                  } else if $0.from == "admin" && $0.to == self.socket.sid {
-                                                        return true
-                                                  } else {
-                                                        return false
-                                                  }
-                                              }
-                messages += filteredMessages
-                print(objects)
+                let messages = objects.map { $0.data }
+                let filteredMessagesFromUser = messages.filter { [weak self] in
+                                                   guard let self = self else { return false }
+                                                   return $0.from == self.socket.sid && $0.to == "admin"
+                                               }
+                let filteredMessagesFromAdmin = messages.filter { [weak self] in
+                                                    guard let self = self else { return false }
+                                                    return $0.from == "admin" && $0.to == self.socket.sid
+                                                }
+                userMessages += filteredMessagesFromUser
+                adminMessages += filteredMessagesFromAdmin
+                self.delegate?.pass(adminMessages: filteredMessagesFromAdmin)
             }
             catch {
                 print(error)
@@ -57,13 +61,30 @@ class WebSokcet {
         }
     }
     
-    var messages: [Message] = [] {
+    var userMessages: [Message] = [] {
         didSet {
-            print(messages)
+            print("User Messages: \(userMessages)")
         }
     }
     
-    func socketEmit() {
+    var adminMessages: [Message] = [] {
+        didSet {
+            print("Admin Messages: \(adminMessages)")
+        }
+    }
+    
+    lazy var getNewAdminMessage: (() -> String?) = { [weak self] in
+        guard let self = self,
+              let message = self.adminMessages.last?.message else { return nil }
+        return message
+    }
+    
+//    func getNewAdminMessage() -> String? {
+//        guard let message = adminMessages.last?.message else { return nil }
+//        return message
+//    }
+    
+    func socketEmit(with text: String) {
         guard let sid = socket.sid else { return }
 //        let message = Message(from: socket.sid!,
 //                              to: "admin",
@@ -71,7 +92,7 @@ class WebSokcet {
         let message: [String:Any] = [
             "from": sid,
             "to": "admin",
-            "message": "Test from iPhone"
+            "message": text
         ]
 //        do {
 //            let encoder = JSONEncoder()
@@ -96,6 +117,8 @@ class WebSokcet {
             print("Message sent from admin")
         }
     }
+    
+    
     
 //    deinit {
 //        socket.disconnect()
