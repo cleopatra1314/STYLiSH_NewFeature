@@ -42,7 +42,8 @@ class STBaseViewController: UIViewController {
     }
     
     @objc func chatBotButtonTouchUpInside(){
-        let chatBotVC = ChatBotViewController()
+        let chatBotVC = WebViewController()
+        //let chatBotVC = ChatBotViewController()
         let navigationControllerOfChatBot = UINavigationController(rootViewController: chatBotVC)
         present(navigationControllerOfChatBot, animated: true)
     }

@@ -15,6 +15,7 @@ target 'STYLiSH' do
   pod 'KeychainAccess'
   pod 'FBSDKLoginKit'
   pod 'SwiftLint'
+  pod 'Socket.IO-Client-Swift', :git=> 'https://github.com/socketio/socket.io-client-swift.git'
 
   post_install do |installer|
         installer.pods_project.build_configurations.each do |config|

@@ -125,6 +125,7 @@
 		3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAC67222EEF71C00785FAB /* String+Extension.swift */; };
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
 		C27D34492A302160005CB0C8 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D34482A302160005CB0C8 /* WebSocket.swift */; };
+		C27D344B2A30259E005CB0C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D344A2A30259E005CB0C8 /* WebViewController.swift */; };
 		C8895D312A2ECCC200F9DD8D /* ChatBotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */; };
 		C8A764212A2E131D00A318DA /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A764202A2E131D00A318DA /* ChatBotViewController.swift */; };
 		C8B0567E2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */; };
@@ -268,6 +269,7 @@
 		42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STYLiSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
 		C27D34482A302160005CB0C8 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		C27D344A2A30259E005CB0C8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTableViewCell.swift; sourceTree = "<group>"; };
 		C8A764202A2E131D00A318DA /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
 		C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotBottomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */,
 				C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */,
 				C27D34482A302160005CB0C8 /* WebSocket.swift */,
+				C27D344A2A30259E005CB0C8 /* WebViewController.swift */,
 				3CB8011F2229A0580029A552 /* Third Party Wrappers */,
 				3C09F51F22115A9F00C5B3E2 /* Extensions */,
 				3CD2913122113D12008B8A2D /* Resource */,
@@ -958,6 +961,7 @@
 				3C1ACFE622152B1F005583E2 /* UIScreen+Extension.swift in Sources */,
 				3C6020DD222B90DF00312958 /* ProductDetailCell.swift in Sources */,
 				3C09F51E22114E1900C5B3E2 /* UIStoryboard+Extension.swift in Sources */,
+				C27D344B2A30259E005CB0C8 /* WebViewController.swift in Sources */,
 				3C0DD87E2213533F00F5237E /* LobbyTableViewCell.swift in Sources */,
 				3C33690E2226F53E008A5A7A /* TrolleyTableViewCell.swift in Sources */,
 				3CC706122216955900CAD850 /* STBaseNavigationController.swift in Sources */,
