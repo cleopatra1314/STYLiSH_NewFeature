@@ -19,7 +19,7 @@ class PromotionTableViewCell: UITableViewCell{
     }()
     let dialogView: UIView = {
         let dialogView = UIView()
-        dialogView.backgroundColor = .lightGray
+        dialogView.backgroundColor = UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1)
         dialogView.layer.cornerRadius = 16
         return dialogView
     }()
@@ -28,9 +28,11 @@ class PromotionTableViewCell: UITableViewCell{
         let goToDivinationButton = UIButton()
         goToDivinationButton.backgroundColor = .blue
         goToDivinationButton.setTitle("抽優惠", for: .normal)
+        goToDivinationButton.layer.cornerRadius = 20
         
         return goToDivinationButton
     }()
+    var goToDivinationClosure: ((PromotionTableViewCell) -> Void)?
     
     
     func layoutCell(){
@@ -64,6 +66,12 @@ class PromotionTableViewCell: UITableViewCell{
             dialogView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8)
         ])
         
+    }
+    
+    
+    @objc func goToDivinationButtonTouchUpInside(){
+        
+        self.goToDivinationClosure!(self)
         
     }
     

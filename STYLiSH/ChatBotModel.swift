@@ -25,3 +25,7 @@ enum ChatBotSenderType: String{
 struct DataOfChatBotSenderType: Codable{
     let type: String
 }
+
+struct Divination: Codable{
+    let image: String
+}
