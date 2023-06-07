@@ -75,6 +75,7 @@ class ChatBotViewController: STBaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = nil
         
         chatBotTableView.delegate = self
         chatBotTableView.dataSource = self

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductViewController: UIViewController {
+class ProductViewController: STBaseViewController {
 
     private enum LayoutType {
         case list
@@ -60,7 +60,7 @@ class ProductViewController: UIViewController {
 
         isListLayout = false
         
-        navigationItem.rightBarButtonItem = nil
+        //navigationItem.rightBarButtonItem = nil
     }
 
     // MARK: - Action
