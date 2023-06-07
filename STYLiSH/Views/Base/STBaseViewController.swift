@@ -36,6 +36,16 @@ class STBaseViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.backIndicatorImage = .asset(.Icons_24px_Back02)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = .asset(.Icons_24px_Back02)
+        
+        let chatBotButton = UIBarButtonItem(image: UIImage(named: "chatbot_icon_small.png"), style: .plain, target: self, action: #selector(chatBotButtonTouchUpInside))
+        self.navigationItem.rightBarButtonItem = chatBotButton
+    }
+    
+    @objc func chatBotButtonTouchUpInside(){
+        //let chatBotVC = WebViewController()
+        let chatBotVC = ChatBotViewController()
+        let navigationControllerOfChatBot = UINavigationController(rootViewController: chatBotVC)
+        present(navigationControllerOfChatBot, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {

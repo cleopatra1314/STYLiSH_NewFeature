@@ -16,6 +16,8 @@ enum Model {
 
 class ChatBotViewController: STBaseViewController{
     
+    let socket = WebSocket.shared
+    
     var dataTypeArray = ["default1", "default2"]
     var dataResult: [Model] = []
     
@@ -50,6 +52,19 @@ class ChatBotViewController: STBaseViewController{
         
         return sendButton
     }()
+    
+    @objc func sendButtonTapped() {
+        guard let text = typingTextField.text,
+              !(text.isEmpty) else { return }
+        print(text)
+        socket.socketEmit(with: text)
+        typingTextField.text = ""
+        dataTypeArray.append("userReplyWithText")
+        dataResult.append(Product(id: 0, title: text, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: []))
+        chatBotTableView.reloadData()
+        chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
+    }
+    
     lazy var bottomCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //section的間距
@@ -81,9 +96,11 @@ class ChatBotViewController: STBaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = nil
         
         chatBotTableView.delegate = self
         chatBotTableView.dataSource = self
+        WebSocket.shared.delegate = self
         
         view.backgroundColor = .white
         setNav()
@@ -91,6 +108,15 @@ class ChatBotViewController: STBaseViewController{
         setCollectionView()
         setTableView()
         
+        sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        
+        chatBotTableView.register(ChatBotTableViewCell.self, forCellReuseIdentifier: "\(ChatBotTableViewCell.self)")
+        
+        if #available(iOS 14.0, *) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { [weak self] _ in
+                self?.socket.socketEmitFromAdmin()
+            }))
+        }
     }
     
 
@@ -220,6 +246,12 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
             cell.dialogTextView.attributedText = NSMutableAttributedString(string: "有什麼可以為你服務的嗎？", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
             cell.layoutCell()
             return cell
+        
+        case "adminMessage":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(ChatBotTableViewCell.self)", for: indexPath) as! ChatBotTableViewCell
+            cell.dialogTextView.attributedText = NSMutableAttributedString(string: dataResult[indexPath.row - 2].title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
+            cell.layoutCell()
+            return cell
             
         case "divination":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PromotionTableViewCell.self)", for: indexPath) as! PromotionTableViewCell
@@ -268,8 +300,7 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
             cell.layoutCell()
             return cell
             
-            
-        case "userReplyForDress", "userReplyForJeans", "userReplyForHots", "userReplyForNew", "userReplyForDivination":
+        case "userReplyForDress", "userReplyForJeans", "userReplyForHots", "userReplyForNew", "userReplyForDivination", "userReplyWithText":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(UserChatTableViewCell.self)", for: indexPath) as! UserChatTableViewCell
             if dataType == "userReplyForDress"{
                 cell.dialogTextView.attributedText = NSMutableAttributedString(string: "推我洋裝", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
@@ -283,7 +314,9 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
             }else if dataType == "userReplyForNew"{
                 cell.dialogTextView.attributedText = NSMutableAttributedString(string: "給我新品", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
                 
-            }else{
+            } else if dataType == "userReplyWithText" {
+                cell.dialogTextView.attributedText = NSMutableAttributedString(string: dataResult[indexPath.row - 2].title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
+            } else {
                 cell.dialogTextView.attributedText = NSMutableAttributedString(string: "給我優惠", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
                 
             }
@@ -418,4 +451,15 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
         print("第 \(indexPath.item + 1) ")
     }
     
+}
+
+extension ChatBotViewController: WebSocketDelegate {
+    func pass(adminMessages: [Message]) {
+        for message in adminMessages {
+            dataTypeArray.append("adminMessage")
+            dataResult.append(Product(id: 0, title: message.message, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: []))
+        }
+        chatBotTableView.reloadData()
+        chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
+    }
 }
