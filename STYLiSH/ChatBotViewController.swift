@@ -23,6 +23,7 @@ class ChatBotViewController: STBaseViewController {
     let chatBotTableView: UITableView = {
         let chatBotTableView = UITableView()
         chatBotTableView.separatorStyle = .none
+        chatBotTableView.allowsSelection = false
         return chatBotTableView
     }()
     let typingAreaView: UIView = {
@@ -110,12 +111,6 @@ class ChatBotViewController: STBaseViewController {
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         
         chatBotTableView.register(ChatBotTableViewCell.self, forCellReuseIdentifier: "\(ChatBotTableViewCell.self)")
-        
-        if #available(iOS 14.0, *) {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { [weak self] _ in
-                self?.socket.socketEmitFromAdmin()
-            }))
-        }
     }
     
     
