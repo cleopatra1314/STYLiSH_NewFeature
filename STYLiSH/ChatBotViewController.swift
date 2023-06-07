@@ -14,8 +14,7 @@ enum Model {
     case divination(Divination)
 }
 
-class ChatBotViewController: STBaseViewController{
-    
+class ChatBotViewController: STBaseViewController {
     let socket = WebSocket.shared
     
     var dataTypeArray = ["default1", "default2"]
@@ -44,8 +43,8 @@ class ChatBotViewController: STBaseViewController{
     }()
     let sendButton: UIButton = {
         let sendButton = UIButton()
-//        sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
-//        sendButton.setImage(UIImage(systemName: "paperplane.fill"), for: .highlighted)
+        //        sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        //        sendButton.setImage(UIImage(systemName: "paperplane.fill"), for: .highlighted)
         sendButton.setBackgroundImage(UIImage(systemName: "paperplane"), for: .normal)
         sendButton.setBackgroundImage(UIImage(systemName: "paperplane.fill"), for: .highlighted)
         sendButton.tintColor = .black
@@ -60,7 +59,7 @@ class ChatBotViewController: STBaseViewController{
         socket.socketEmit(with: text)
         typingTextField.text = ""
         dataTypeArray.append("userReplyWithText")
-        dataResult.append(Product(id: 0, title: text, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: []))
+        dataResult.append(Model.product(Product(id: 0, title: text, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: [], type: "")))
         chatBotTableView.reloadData()
         chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
     }
@@ -72,7 +71,7 @@ class ChatBotViewController: STBaseViewController{
         //cell間距
         layout.minimumLineSpacing = 10
         //cell 長寬
-//        layout.itemSize = CGSize(width: 100, height: 30)
+        //        layout.itemSize = CGSize(width: 100, height: 30)
         //滑動的方向
         layout.scrollDirection = .horizontal
         //以 auto layout 計算 cell 大小
@@ -119,9 +118,9 @@ class ChatBotViewController: STBaseViewController{
         }
     }
     
-
+    
     override func viewWillLayoutSubviews() {
-//        typingTextField.layer.cornerRadius = typingTextField.frame.height / 2
+        //        typingTextField.layer.cornerRadius = typingTextField.frame.height / 2
         chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
     }
     
@@ -132,7 +131,7 @@ class ChatBotViewController: STBaseViewController{
         let closeBtn = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(closeBtn))
         closeBtn.tintColor = .white
         self.navigationItem.leftBarButtonItem = closeBtn
-//        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Icon_chatbot.png"))
+        //        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Icon_chatbot.png"))
         
         
         self.navigationItem.titleView?.contentMode = .scaleAspectFit
@@ -193,8 +192,8 @@ class ChatBotViewController: STBaseViewController{
             typingTextField.topAnchor.constraint(equalTo: typingAreaView.topAnchor, constant: 12),
             typingTextField.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             sendButton.trailingAnchor.constraint(equalTo: typingAreaView.trailingAnchor, constant: -16),
-//            sendButton.topAnchor.constraint(equalTo: typingAreaView.topAnchor, constant: 8),
-//            sendButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            //            sendButton.topAnchor.constraint(equalTo: typingAreaView.topAnchor, constant: 8),
+            //            sendButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             sendButton.centerYAnchor.constraint(equalTo: typingTextField.centerYAnchor),
             sendButton.heightAnchor.constraint(equalToConstant: 28),
             sendButton.widthAnchor.constraint(equalTo: sendButton.heightAnchor, multiplier: 1)
@@ -216,12 +215,10 @@ class ChatBotViewController: STBaseViewController{
         ])
         
     }
-    
-    
 }
 
 
-extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
+extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataTypeArray.count
@@ -249,7 +246,13 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
         
         case "adminMessage":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(ChatBotTableViewCell.self)", for: indexPath) as! ChatBotTableViewCell
-            cell.dialogTextView.attributedText = NSMutableAttributedString(string: dataResult[indexPath.row - 2].title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
+            
+            switch dataResult[indexPath.item - 2]{
+            case .product(let product):
+                cell.dialogTextView.attributedText = NSMutableAttributedString(string: product.title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
+            case .divination:
+                return cell
+            }
             cell.layoutCell()
             return cell
             
@@ -264,12 +267,12 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
                 return cell
             }
             cell.layoutCell()
-                cell.goToDivinationClosure = { cell in
-                    //                let divinationVC = self.tabBarController?.viewControllers![2]
-                    //                self.navigationController?.popToViewController(divinationVC!, animated: true)
-                    self.tabBarController?.selectedIndex = 2
-                }
-                return cell
+            cell.goToDivinationClosure = { cell in
+                //                let divinationVC = self.tabBarController?.viewControllers![2]
+                //                self.navigationController?.popToViewController(divinationVC!, animated: true)
+                self.tabBarController?.selectedIndex = 2
+            }
+            return cell
                 
         case "dress", "jeans", "hots", "new":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(DressTableViewCell.self)", for: indexPath) as! DressTableViewCell
@@ -315,7 +318,12 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.dialogTextView.attributedText = NSMutableAttributedString(string: "給我新品", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
                 
             } else if dataType == "userReplyWithText" {
-                cell.dialogTextView.attributedText = NSMutableAttributedString(string: dataResult[indexPath.row - 2].title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
+                switch dataResult[indexPath.item - 2] {
+                case .product(let product):
+                    cell.dialogTextView.attributedText = NSMutableAttributedString(string: product.title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
+                case .divination:
+                    return cell
+                }
             } else {
                 cell.dialogTextView.attributedText = NSMutableAttributedString(string: "給我優惠", attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Regular", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor.white])
                 
@@ -457,7 +465,7 @@ extension ChatBotViewController: WebSocketDelegate {
     func pass(adminMessages: [Message]) {
         for message in adminMessages {
             dataTypeArray.append("adminMessage")
-            dataResult.append(Product(id: 0, title: message.message, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: []))
+            dataResult.append(Model.product(Product(id: 0, title: message.message, description: "", price: 0, texture: "", wash: "", place: "", note: "", story: "", colors: [], sizes: [], variants: [], mainImage: "", images: [], type: "")))
         }
         chatBotTableView.reloadData()
         chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
