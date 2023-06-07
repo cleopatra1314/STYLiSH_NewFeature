@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: STBaseViewController {
 
     @IBOutlet weak var imageProfile: UIImageView!
     

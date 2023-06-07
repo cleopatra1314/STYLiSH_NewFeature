@@ -124,6 +124,15 @@
 		3CED80AF2301301300B7DA8E /* Trolley.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED80B12301301300B7DA8E /* Trolley.storyboard */; };
 		3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAC67222EEF71C00785FAB /* String+Extension.swift */; };
 		58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */; };
+		C27D34492A302160005CB0C8 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D34482A302160005CB0C8 /* WebSocket.swift */; };
+		C27D344B2A30259E005CB0C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D344A2A30259E005CB0C8 /* WebViewController.swift */; };
+		C8895D312A2ECCC200F9DD8D /* ChatBotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */; };
+		C8A764212A2E131D00A318DA /* ChatBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A764202A2E131D00A318DA /* ChatBotViewController.swift */; };
+		C8B0567E2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */; };
+		C8B056802A2F65FF006D99EB /* PromotionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */; };
+		C8D1472B2A2F311F006093C6 /* UserChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */; };
+		C8D1472D2A2F41A9006093C6 /* ChatBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */; };
+		C8D1472F2A2F5096006093C6 /* DressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */; };
 		C2358DA22A2DC77F00210AF7 /* CouponTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */; };
 		C2358DA42A2DC88C00210AF7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA32A2DC88C00210AF7 /* CouponCell.swift */; };
 		C2358DA82A2F1D3100210AF7 /* SelectedCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */; };
@@ -282,6 +291,15 @@
 		3CFAC67222EEF71C00785FAB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		42C2B4AF3EF2ABFF2BB9F7AB /* Pods_STYLiSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STYLiSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A77A9F262F3CC800B88679 /* LSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LSColor+Extension.swift"; sourceTree = "<group>"; };
+		C27D34482A302160005CB0C8 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		C27D344A2A30259E005CB0C8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotTableViewCell.swift; sourceTree = "<group>"; };
+		C8A764202A2E131D00A318DA /* ChatBotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBotViewController.swift; sourceTree = "<group>"; };
+		C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotBottomCollectionViewCell.swift; sourceTree = "<group>"; };
+		C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionTableViewCell.swift; sourceTree = "<group>"; };
+		C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChatTableViewCell.swift; sourceTree = "<group>"; };
+		C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotModel.swift; sourceTree = "<group>"; };
+		C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTableViewCell.swift; sourceTree = "<group>"; };
 		C2358DA12A2DC77F00210AF7 /* CouponTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTableViewController.swift; sourceTree = "<group>"; };
 		C2358DA32A2DC88C00210AF7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		C2358DA72A2F1D3100210AF7 /* SelectedCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCouponView.swift; sourceTree = "<group>"; };
@@ -584,6 +602,15 @@
 		3CD2911B221135E2008B8A2D /* STYLiSH */ = {
 			isa = PBXGroup;
 			children = (
+				C8B0567D2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift */,
+				C8A764202A2E131D00A318DA /* ChatBotViewController.swift */,
+				C8B0567F2A2F65FF006D99EB /* PromotionTableViewCell.swift */,
+				C8D1472E2A2F5096006093C6 /* DressTableViewCell.swift */,
+				C8D1472C2A2F41A9006093C6 /* ChatBotModel.swift */,
+				C8895D302A2ECCC200F9DD8D /* ChatBotTableViewCell.swift */,
+				C8D1472A2A2F311F006093C6 /* UserChatTableViewCell.swift */,
+				C27D34482A302160005CB0C8 /* WebSocket.swift */,
+				C27D344A2A30259E005CB0C8 /* WebViewController.swift */,
 				3CB8011F2229A0580029A552 /* Third Party Wrappers */,
 				3C09F51F22115A9F00C5B3E2 /* Extensions */,
 				3CD2913122113D12008B8A2D /* Resource */,
@@ -970,20 +997,25 @@
 				3C6FABF522FD39EB00226316 /* STOrderProductCellViewModel.swift in Sources */,
 				3CED4C0C22141E9700121D4B /* MarketProvider.swift in Sources */,
 				3C831C6022E9945500112298 /* STOrderProductCell.swift in Sources */,
+				C8B0567E2A2F626D006D99EB /* ChatBotBottomCollectionViewCell.swift in Sources */,
 				3C1ACFE922152D29005583E2 /* ProfileCollectionViewCell.swift in Sources */,
 				3CB801232229A5290029A552 /* MJRefreshWrapper.swift in Sources */,
 				3C546BE522EABB6D0082C655 /* CheckoutViewController.swift in Sources */,
+				C27D34492A302160005CB0C8 /* WebSocket.swift in Sources */,
 				3CD2911D221135E2008B8A2D /* AppDelegate.swift in Sources */,
 				3CEBE07A222F72600064EF82 /* STYLiSH.xcdatamodeld in Sources */,
 				3CDC5A66222D85990071D0D1 /* ColorSelectionCell.swift in Sources */,
 				3C6020D8222B883600312958 /* ProductDescriptionTableViewCell.swift in Sources */,
 				3C0DD876221348E900F5237E /* LobbyViewController.swift in Sources */,
 				3C33691F2227DC7B008A5A7A /* TrolleySelectionView.swift in Sources */,
+				C8D1472D2A2F41A9006093C6 /* ChatBotModel.swift in Sources */,
 				3C831C6422E9AF8F00112298 /* STOrderUserInputCell.swift in Sources */,
 				3C4B10E222292EBB009942B7 /* STTapPayViewController.swift in Sources */,
+				C8A764212A2E131D00A318DA /* ChatBotViewController.swift in Sources */,
 				C2358DA22A2DC77F00210AF7 /* CouponTableViewController.swift in Sources */,
 				3C831C8A22EAAF7A00112298 /* STPaymentInfoTableViewCell.swift in Sources */,
 				3C990F6C22E5C78200F2FCEA /* ProductDetailView.swift in Sources */,
+				C8B056802A2F65FF006D99EB /* PromotionTableViewCell.swift in Sources */,
 				3C546BE722EAC79D0082C655 /* STOrderHeaderView.swift in Sources */,
 				3C5DD7CC2227EFFF0053B67A /* TrolleyViewController.swift in Sources */,
 				3C6020EA222BC00100312958 /* UILabel+Extension.swift in Sources */,
@@ -1031,9 +1063,11 @@
 				3CB801252229AEE30029A552 /* UITableView+Extension.swift in Sources */,
 				C8BA70B12A2B3D84003654E5 /* ButtonTableViewCell.swift in Sources */,
 				3CDC5A6A222D860B0071D0D1 /* SizeSelectionCell.swift in Sources */,
+				C8895D312A2ECCC200F9DD8D /* ChatBotTableViewCell.swift in Sources */,
 				3C1ACFE622152B1F005583E2 /* UIScreen+Extension.swift in Sources */,
 				3C6020DD222B90DF00312958 /* ProductDetailCell.swift in Sources */,
 				3C09F51E22114E1900C5B3E2 /* UIStoryboard+Extension.swift in Sources */,
+				C27D344B2A30259E005CB0C8 /* WebViewController.swift in Sources */,
 				3C0DD87E2213533F00F5237E /* LobbyTableViewCell.swift in Sources */,
 				3C33690E2226F53E008A5A7A /* TrolleyTableViewCell.swift in Sources */,
 				3CC706122216955900CAD850 /* STBaseNavigationController.swift in Sources */,
@@ -1046,7 +1080,9 @@
 				3CE7A51E22308D34009FF003 /* OrderObject.swift in Sources */,
 				3CD9BB35223B882C0012C00D /* AuthViewController.swift in Sources */,
 				58A77AA0262F3CC800B88679 /* LSColor+Extension.swift in Sources */,
+				C8D1472B2A2F311F006093C6 /* UserChatTableViewCell.swift in Sources */,
 				3CB801212229A0970029A552 /* KingFisherWrapper.swift in Sources */,
+				C8D1472F2A2F5096006093C6 /* DressTableViewCell.swift in Sources */,
 				3CFAC67322EEF71C00785FAB /* String+Extension.swift in Sources */,
 				3C33863F221BB2B800ED97E4 /* ProductListViewController.swift in Sources */,
 				3C6020E6222BB03400312958 /* STBaseViewController.swift in Sources */,

@@ -24,12 +24,13 @@ class LobbyViewController: STBaseViewController {
     }
 
     private let marketProvider = MarketProvider()
+    
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
+        self.navigationItem.titleView = UIImageView(image: .asset(.Image_Logo02))
         
         lobbyView.beginHeaderRefresh()
     }
