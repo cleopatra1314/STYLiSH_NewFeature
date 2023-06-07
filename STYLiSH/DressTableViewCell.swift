@@ -32,6 +32,7 @@ class DressTableViewCell: UITableViewCell{
         return itemTitlelabel
     }()
     let itemImageView = UIImageView()
+//    let itemDetailButton = UIButton()
     
     func layoutCell(){
         self.contentView.addSubview(profileImageView)

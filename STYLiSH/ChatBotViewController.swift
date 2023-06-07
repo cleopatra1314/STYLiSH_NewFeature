@@ -9,11 +9,15 @@ import Foundation
 import UIKit
 import Kingfisher
 
+enum Model {
+    case product(Product)
+    case divination(Divination)
+}
 
 class ChatBotViewController: STBaseViewController{
     
     var dataTypeArray = ["default1", "default2"]
-    var dataResult: [Product] = []
+    var dataResult: [Model] = []
     
     let chatBotTableView: UITableView = {
         let chatBotTableView = UITableView()
@@ -32,7 +36,7 @@ class ChatBotViewController: STBaseViewController{
     let typingTextField: UITextField = {
         let typingTextField = UITextField()
         typingTextField.backgroundColor = UIColor(cgColor: CGColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1))
-//        typingTextField.layer.cornerRadius = 16
+        typingTextField.layer.cornerRadius = 20
         
         return typingTextField
     }()
@@ -86,11 +90,13 @@ class ChatBotViewController: STBaseViewController{
         setTypingArea()
         setCollectionView()
         setTableView()
+        
     }
     
 
     override func viewWillLayoutSubviews() {
-        typingTextField.layer.cornerRadius = typingTextField.frame.height / 2
+//        typingTextField.layer.cornerRadius = typingTextField.frame.height / 2
+        chatBotTableView.scrollToRow(at: IndexPath(row: dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
     }
     
     
@@ -217,33 +223,51 @@ extension ChatBotViewController: UITableViewDelegate, UITableViewDataSource{
             
         case "divination":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(PromotionTableViewCell.self)", for: indexPath) as! PromotionTableViewCell
-//            cell.itemImageView.kf.setImage(with: URL(string: dataResult[indexPath.item - 2].image))
-            cell.layoutCell()
-            cell.goToDivinationClosure = { cell in
-//                let divinationVC = self.tabBarController?.viewControllers[2]
-//                self.navigationController?.popToViewController(<#T##UIViewController#>, animated: <#T##Bool#>)
-            }
-            return cell
             
+            switch dataResult[indexPath.item - 2]{
+            case .divination(let divination):
+                cell.itemImageView.kf.setImage(with: URL(string: divination.image))
+                
+            case .product:
+                return cell
+            }
+            cell.layoutCell()
+                cell.goToDivinationClosure = { cell in
+                    //                let divinationVC = self.tabBarController?.viewControllers![2]
+                    //                self.navigationController?.popToViewController(divinationVC!, animated: true)
+                    self.tabBarController?.selectedIndex = 2
+                }
+                return cell
+                
         case "dress", "jeans", "hots", "new":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(DressTableViewCell.self)", for: indexPath) as! DressTableViewCell
-//            if dataType == "dress"{
-                //因為有兩筆預設訊息資料 (dataTypeArray)，所以 dataResult array - 2
-//                cell.itemTitlelabel.text = dataResult[indexPath.item - 2].title
-                cell.itemImageView.kf.setImage(with: URL(string: dataResult[indexPath.item - 2].mainImage))
-                cell.itemTitlelabel.attributedText = NSMutableAttributedString(string: dataResult[indexPath.item - 2].title, attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Medium", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
-//            }else if dataType == "jeans"{
-//                cell.itemTitlelabel.text = dataResult[indexPath.item - 2].title
-//                cell.itemImageView.kf.setImage(with: URL(string: dataResult[indexPath.item - 2].mainImage))
-//            }else if dataType == "hots"{
-//                cell.itemTitlelabel.text = dataResult[indexPath.item - 2].title
-//                cell.itemImageView.kf.setImage(with: URL(string: dataResult[indexPath.item - 2].mainImage))
-//            }else{
-//                cell.itemTitlelabel.text = dataResult[indexPath.item - 2].title
-//                cell.itemImageView.kf.setImage(with: URL(string: dataResult[indexPath.item - 2].mainImage))
-//            }
+           
+            switch dataResult[indexPath.item - 2]{
+            case .product(let product):
+                
+                if dataType == "dress"{
+                    //因為有兩筆預設訊息資料 (dataTypeArray)，所以 dataResult array - 2
+                    cell.itemTitlelabel.text = product.title
+                    cell.itemImageView.kf.setImage(with: URL(string: (product.mainImage)))
+                    cell.itemTitlelabel.attributedText = NSMutableAttributedString(string: (product.title), attributes: [NSAttributedString.Key.font: UIFont(name: "PingFangTC-Medium", size: 15), NSAttributedString.Key.kern: 1.6, NSAttributedString.Key.foregroundColor: UIColor(red: 79/255, green: 79/255, blue: 79/255, alpha: 1)])
+                }else if dataType == "jeans"{
+                    cell.itemTitlelabel.text = product.title
+                    cell.itemImageView.kf.setImage(with: URL(string: (product.mainImage)))
+                }else if dataType == "hots"{
+                    cell.itemTitlelabel.text = product.title
+                    cell.itemImageView.kf.setImage(with: URL(string: (product.mainImage)))
+                }else{
+                    cell.itemTitlelabel.text = product.title
+                    cell.itemImageView.kf.setImage(with: URL(string: (product.mainImage)))
+                }
+                
+            case .divination:
+                return cell
+            }
+            
             cell.layoutCell()
             return cell
+            
             
         case "userReplyForDress", "userReplyForJeans", "userReplyForHots", "userReplyForNew", "userReplyForDivination":
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(UserChatTableViewCell.self)", for: indexPath) as! UserChatTableViewCell
@@ -302,11 +326,12 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.twitClosure = { collectionViewCell in
             let indexOfSelectedCanMessage = self.bottomCollectionView.indexPath(for: collectionViewCell)
             var parameter: STSuccessParser<DataOfChatBotSenderType>?
-    
+            var isDivination = false
             if indexOfSelectedCanMessage?.item == 0{
                 self.dataTypeArray += [ChatBotSenderType.userReplyForDress.rawValue, ChatBotSenderType.dress.rawValue]
                 let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "dress"), paging: nil)
                 parameter = parameters
+                
                 
             }else if indexOfSelectedCanMessage?.item == 1{
                 self.dataTypeArray.append(ChatBotSenderType.userReplyForJeans.rawValue)
@@ -332,10 +357,11 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
                 let parameters = STSuccessParser<DataOfChatBotSenderType>(data: DataOfChatBotSenderType(type: "divination"), paging: nil)
                 parameter = parameters
                 
+                isDivination = true
+
             }
             
             //串接 post api
-//                let postData = parameters.data(using: .utf8)
             let postData = try? JSONEncoder().encode(parameter)
 
             var request = URLRequest(url: URL(string: "https://hyperushle.com/api/ios/chatbox")!,timeoutInterval: Double.infinity)
@@ -349,14 +375,22 @@ extension ChatBotViewController: UICollectionViewDelegate, UICollectionViewDataS
                     print(String(describing: error))
                     return
                 }
-                print("拿到的資料為 \(String(data: data, encoding: .utf8)!)")
+//                print("拿到的資料為 \(String(data: data, encoding: .utf8)!)")
                 
                 do{
-                    let result = try JSONDecoder().decode(STSuccessParser<Product>.self, from: data)
-                    self.dataResult += [result.data, result.data]
+                    if isDivination {
+                        let result = try JSONDecoder().decode(STSuccessParser<Divination>.self, from: data)
+                        self.dataResult += [Model.divination(result.data), Model.divination(result.data)]
+                        
+                    } else {
+                        let result = try JSONDecoder().decode(STSuccessParser<Product>.self, from: data)
+                        self.dataResult += [Model.product(result.data), Model.product(result.data)]
+                        
+                    }
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [self] in
                         self.chatBotTableView.reloadData()
+                        self.chatBotTableView.scrollToRow(at: IndexPath(row: self.dataTypeArray.count - 1, section: 0), at: .bottom, animated: true)
                     }
                     
                 }catch{

@@ -9,7 +9,7 @@
 import Foundation
 
 struct STSuccessParser<T: Codable>: Codable {
-    let data: T
+    var data: T
     let paging: Int?
     
     enum CodingKeys: String, CodingKey {
