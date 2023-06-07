@@ -10,6 +10,9 @@ import UIKit
 
 class CheckoutViewController: STBaseViewController {
     
+    var coupon: Coupons.Coupon?
+    var couponIndexPath: IndexPath?
+    
     private struct Segue {
         static let success = "SegueSuccess"
     }
@@ -66,6 +69,7 @@ class CheckoutViewController: STBaseViewController {
         tableView.lk_registerCellWithNib(identifier: STOrderProductCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STOrderUserInputCell.identifier, bundle: nil)
         tableView.lk_registerCellWithNib(identifier: STPaymentInfoTableViewCell.identifier, bundle: nil)
+        tableView.register(CouponCheckoutCell.self, forCellReuseIdentifier: CouponCheckoutCell.reuseIdentifier)
         
         let headerXib = UINib(nibName: STOrderHeaderView.identifier, bundle: nil)
         tableView.register(headerXib, forHeaderFooterViewReuseIdentifier: STOrderHeaderView.identifier)
@@ -79,7 +83,7 @@ class CheckoutViewController: STBaseViewController {
             return onShowLogin()
         }
         
-        switch orderProvider.order.payment {
+        switch orderProvider.order.paymentType {
         case .credit: checkoutWithTapPay()
         case .cash: checkoutWithCash()
         }
@@ -126,7 +130,7 @@ class CheckoutViewController: STBaseViewController {
     }
     
     func canCheckout() -> Bool {
-        switch orderProvider.order.payment {
+        switch orderProvider.order.paymentType {
         case .cash: return orderProvider.order.isReady()
         case .credit: return orderProvider.order.isReady() && isCanGetPrime
         }
@@ -142,19 +146,26 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Section Header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 67.0
+        switch orderProvider.orderCustructor[section] {
+        case .coupon: return 0
+        default: return 67.0
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard
-            let headerView = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: STOrderHeaderView.identifier
-            ) as? STOrderHeaderView
-        else {
-            return nil
+        switch orderProvider.orderCustructor[section] {
+        case .coupon: return nil
+        default:
+            guard
+                let headerView = tableView.dequeueReusableHeaderFooterView(
+                    withIdentifier: STOrderHeaderView.identifier
+                ) as? STOrderHeaderView
+            else {
+                return nil
+            }
+            headerView.titleLabel.text = orderProvider.orderCustructor[section].title()
+            return headerView
         }
-        headerView.titleLabel.text = orderProvider.orderCustructor[section].title()
-        return headerView
     }
     
     // MARK: - Section Footer
@@ -182,6 +193,55 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
             return mappingCellWtih(payment: "", at: indexPath)
         case .reciever:
             return mappingCellWtih(reciever: orderProvider.order.reciever, at: indexPath)
+        case .coupon:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CouponCheckoutCell.reuseIdentifier, for: indexPath)
+            cell.selectionStyle = .none
+            guard let couponCheckoutCell = cell as? CouponCheckoutCell else { return cell}
+            return couponCheckoutCell
+        }
+    }
+    
+    // MARK: - CouponTableView
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let couponTableVC = CouponTableViewController()
+            // Receive coupon from couponTable
+            couponTableVC.passCoupon = { [weak self] indexPath, coupon in
+                self?.coupon = coupon
+                self?.couponIndexPath = indexPath
+                
+                let couponCheckoutCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? CouponCheckoutCell
+                guard let aCoupon = self?.coupon else {
+                    self?.orderProvider.order.freightDiscount = 0
+                    self?.orderProvider.order.productPriceDiscount = 0
+                    self?.orderProvider.order.couponId = nil
+                    couponCheckoutCell?.selectedCouponView.configure(hasCoupon: false)
+                    tableView.reloadData()
+                    return
+                }
+                let couponType = Coupons.CouponType.getCouponType(for: aCoupon.type)
+                self?.orderProvider.order.couponId = aCoupon.id
+                
+                couponCheckoutCell?.selectedCouponView.configure(hasCoupon: true)
+                couponCheckoutCell?.selectedCouponView.configure(with: aCoupon.type,
+                                                                couponDiscountText: aCoupon.discount,
+                                                                couponExpirationDateText: aCoupon.expireTime)
+                
+                switch couponType {
+                case .freeShipping:
+                    self?.orderProvider.order.freightDiscount = aCoupon.discount
+                default:
+                    self?.orderProvider.order.productPriceDiscount = aCoupon.discount
+                }
+                tableView.reloadData()
+            }
+            // Pass coupon to couponTable
+            if let coupon = coupon,
+               let couponIndexPath = couponIndexPath {
+                couponTableVC.selectedCouponIndexPath = couponIndexPath
+                couponTableVC.selectedCoupon = coupon
+            }
+            navigationController?.pushViewController(couponTableVC, animated: true)
         }
     }
     
@@ -231,10 +291,10 @@ extension CheckoutViewController: UITableViewDataSource, UITableViewDelegate {
         inputCell.creditView.stickSubView(tappayVC.view)
         inputCell.delegate = self
         inputCell.layoutCellWith(
-            productPrice: orderProvider.order.productPrices,
-            shipPrice: orderProvider.order.freight,
+            productPrice: orderProvider.order.productPricesToDisplay,
+            shipPrice: orderProvider.order.freightToDisplay,
             productCount: orderProvider.order.amount,
-            payment: orderProvider.order.payment.title(),
+            payment: orderProvider.order.paymentType.title(),
             isCheckoutEnable: canCheckout()
         )
         inputCell.checkoutBtn.isEnabled = canCheckout()
@@ -261,7 +321,7 @@ extension CheckoutViewController: STPaymentInfoTableViewCellDelegate {
     }
     
     func didChangePaymentMethod(_ cell: STPaymentInfoTableViewCell, index: Int) {
-        orderProvider.order.payment = orderProvider.payments[index]
+        orderProvider.order.paymentType = orderProvider.payments[index]
         updateCheckoutButton()
     }
     
@@ -287,11 +347,20 @@ extension CheckoutViewController: STPaymentInfoTableViewCellDelegate {
 extension CheckoutViewController: STOrderUserInputCellDelegate {
     
     func didChangeUserData(_ cell: STOrderUserInputCell, data: STOrderUserInputCellModel) {
+        var time: String
+        switch data.shipTime {
+        case "08:00-12:00": time = "morning"
+        case "14:00-18:00": time = "afternoon"
+        case "不指定": time = "anytime"
+        default: time = "morning"
+        }
+        
         let newReciever = Reciever(
             name: data.username,
             email: data.email,
             phoneNumber: data.phoneNumber,
             address: data.address,
+            time: time,
             shipTime: data.shipTime
         )
         orderProvider.order.reciever = newReciever
