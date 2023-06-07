@@ -14,15 +14,23 @@ class DressTableViewCell: UITableViewCell{
     let profileImageView: UIImageView = {
         let profileImageView = UIImageView()
         profileImageView.image = UIImage(named: "Icon_chatbot.png")
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = 4
+        
+        profileImageView.contentMode = .scaleAspectFit
         return profileImageView
     }()
     let dialogView: UIView = {
         let dialogView = UIView()
-        dialogView.backgroundColor = .lightGray
+        dialogView.backgroundColor = UIColor(red: 232/255, green: 232/255, blue: 232/255, alpha: 1)
         dialogView.layer.cornerRadius = 16
         return dialogView
     }()
-    let itemTitlelabel = UILabel()
+    let itemTitlelabel: UILabel = {
+        let itemTitlelabel = UILabel()
+        itemTitlelabel.font = UIFont(name: "PingFangTC-Regular", size: 14)
+        return itemTitlelabel
+    }()
     let itemImageView = UIImageView()
     
     func layoutCell(){

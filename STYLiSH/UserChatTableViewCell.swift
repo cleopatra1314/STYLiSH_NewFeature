@@ -14,9 +14,9 @@ class UserChatTableViewCell: UITableViewCell{
     
    let dialogTextView: UITextView = {
         let dialogTextView = UITextView()
-        dialogTextView.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
-        dialogTextView.backgroundColor = .green
-        dialogTextView.layer.cornerRadius = 16
+        dialogTextView.textContainerInset = .init(top: 10, left: 12, bottom: 10, right: 12)
+        dialogTextView.backgroundColor = UIColor(red: 54/255, green: 54/255, blue: 54/255, alpha: 1)
+        dialogTextView.layer.cornerRadius = 20
         dialogTextView.isScrollEnabled = false
 
         return dialogTextView
